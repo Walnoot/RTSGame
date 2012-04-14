@@ -22,6 +22,7 @@ import walnoot.rtsgame.screen.Screen;
 
 public class RTSComponent extends Canvas implements Runnable, KeyListener, MouseListener, MouseMotionListener{
 	private static final long serialVersionUID = 1L;
+	public static final double MS_PER_TICK = 1000.0 / 60.0;
 	
 	private Screen screen;
 	private boolean running = true;
@@ -73,23 +74,41 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 		
 		long startTime = System.nanoTime();
 		long totalTime = startTime;
+		double tickTime = 0;
 		
-		int tickCount = 0;
+		int numTicks = 0, numFrames = 0;
+		
 		
 		if(Options.startFullScreen) fullScreenManager.setFullScreen();
 		
 		while(running ){
 			long timePassed = System.nanoTime() - totalTime; //hoeveel tijd er verstreken is sinds de vorige update
 			totalTime += timePassed;
-			tickCount++;
+			tickTime += timePassed / 1000000.0;
 			
-			screen.update((double)timePassed / 1000000.0);
+			//screen.update((double)timePassed / 1000000.0);
 			
-			//if(tickCount % 20 == 0) System.out.println("fps: " + Math.round(1 / ((double)timePassed / 1000000000.0)));
+			boolean shouldRender = false;
+			while(tickTime > MS_PER_TICK){
+				tickTime -= MS_PER_TICK;
+				shouldRender = true;
+				
+				numTicks++;
+				
+				screen.update();
+			}
 			
-			this.fps = Math.round(1 / ((double)timePassed / 1000000000.0));
+			if(isShowing() && shouldRender){
+				render();
+				numFrames++;
+			}
 			
-			if(isShowing()) render();
+			if(numTicks >= 60){
+				fps = numFrames;
+				
+				numTicks = 0;
+				numFrames = 0;
+			}
 			
 			fullScreenManager.update();
 			

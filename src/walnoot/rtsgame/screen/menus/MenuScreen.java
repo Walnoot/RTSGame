@@ -20,7 +20,7 @@ public abstract class MenuScreen extends Screen{
 		}
 	}
 	
-	public void update(double timePassed){
+	public void update(){
 		for(MenuButton b: getButtons()){
 			b.setMouseLocation(super.getMouseLocation());
 		}

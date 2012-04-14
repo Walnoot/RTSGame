@@ -3,6 +3,7 @@ package walnoot.rtsgame.map.entities;
 import java.awt.Point;
 import java.util.LinkedList;
 
+import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.map.Direction;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tribes.Tribe;
@@ -17,7 +18,7 @@ public abstract class MovingEntity extends Entity{
 		super(map, xPos, yPos, tribe);
 	}
 	
-	public void update(double timePassed) {
+	public void update(){
 		if(nextDirections.isEmpty()){
 			timeTraveled = 0;
 			return;
@@ -26,7 +27,7 @@ public abstract class MovingEntity extends Entity{
 		Direction nextDirection = nextDirections.get(0);
 		if(nextDirection == null) nextDirection = direction;
 		
-		timeTraveled += timePassed / (getTravelTime() * (nextDirection.isDiagonal() ? Math.sqrt(2) : 1.0));
+		timeTraveled += RTSComponent.MS_PER_TICK / (getTravelTime() * (nextDirection.isDiagonal() ? Math.sqrt(2) : 1.0));
 		
 		while(timeTraveled > 1){
 			timeTraveled -= 1;

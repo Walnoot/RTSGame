@@ -10,36 +10,45 @@ import javax.swing.JOptionPane;
 public class PerlinNoise2D {
 	private static int seed = new Random().nextInt();
 
-	public static float noise(int x, int y){
-		int n = x + y * 57;
-		n += seed;
-		return PerlinNoise.noise(n);
+	private static float noise(int x, int y){
+		int i = x + y * 57;
+		i += seed;
+		
+		i = (i << 13) ^ i;
+		return ( 1.0f - ( (i * (i * i * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0f);
 	}
 	
-	public static float smoothNoise(int x, int y){
+	/*private static float smoothNoise(int x, int y){
 		float corners = (noise(x - 1, y - 1) + noise(x + 1, y - 1) + noise(x - 1, y + 1) + noise(x + 1, y + 1)) / 16f;
 		float sides = (noise(x - 1, y) + noise(x + 1, y) + noise(x, y + 1) + noise(x, y - 1)) / 8f;
 		float center = noise(x, y) / 4f;
 		
 		return center + sides + corners;
+	}*/
+	
+	private static float interpolate(float a, float b, float x){
+		float ft = (float) (x * Math.PI);
+		float i = (float) ((1 - Math.cos(ft)) * .5);
+		
+		return a * (1- i) + (b * i);
 	}
 	
-	public static float interpolatedNoise(float x, float y){
+	private static float interpolatedNoise(float x, float y){
 		int intX = (int)x;
 		float fracX = x - intX;
 		
 		int intY = (int)y;
 		float fracY = y - intY;
 		
-		float a = smoothNoise(intX, intY);
-		float b = smoothNoise(intX + 1, intY);
-		float c = smoothNoise(intX, intY + 1);
-		float d = smoothNoise(intX + 1, intY + 1);
+		float a = noise(intX, intY);
+		float b = noise(intX + 1, intY);
+		float c = noise(intX, intY + 1);
+		float d = noise(intX + 1, intY + 1);
 		
-		float interpolateA = PerlinNoise.interpolate(a, b, fracX);
-		float interpolateB = PerlinNoise.interpolate(c, d, fracX);
+		float interpolateA = interpolate(a, b, fracX);
+		float interpolateB = interpolate(c, d, fracX);
 		
-		return PerlinNoise.interpolate(interpolateA, interpolateB, fracY);
+		return interpolate(interpolateA, interpolateB, fracY);
 	}
 	
 	/**
@@ -66,7 +75,7 @@ public class PerlinNoise2D {
 		return result;
 	}
 	
-	public static void main(String[] args) throws IOException{
+	/*public static void main(String[] args) throws IOException{
 		boolean running = false;
 		
 		do{
@@ -98,5 +107,5 @@ public class PerlinNoise2D {
 			
 			if(option == JOptionPane.OK_OPTION) running = true;
 		}while(running);
-	}
+	}*/
 }

@@ -20,7 +20,7 @@ public abstract class Entity {
 		this.tribe = tribe;
 	}
 	
-	public abstract void update(double timePassed);
+	public abstract void update();
 	public abstract void render(Graphics g);
 	
 	public abstract int getMaxHealth();

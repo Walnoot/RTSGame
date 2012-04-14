@@ -12,7 +12,7 @@ import walnoot.rtsgame.screen.menus.MainMenu;
 
 //laat het logo paar seconden zien, switcht daarna naar menu
 public class TitleScreen extends Screen{
-	private long totalTime;
+	private int totalTime;
 	private BufferedImage grass;
 	private BufferedImage grass2;
 	private BufferedImage logo;
@@ -59,12 +59,12 @@ public class TitleScreen extends Screen{
 		//g.drawString(""+totalTime, 30, 30);
 	}
 	
-	public void update(double timePassed) {
-		totalTime += timePassed;
+	public void update() {
+		totalTime++;
 		if(totalTime > 2000 && !(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this));
 		
 		if(logoTransparancy < 1.0f){
-			logoTransparancy += (float)timePassed / 2000;
+			logoTransparancy += 0.001;
 		}
 		if(logoTransparancy > 1.0f){
 			logoTransparancy = 1.0f;

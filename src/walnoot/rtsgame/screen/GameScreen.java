@@ -42,13 +42,13 @@ public class GameScreen extends Screen{
 		font.drawBoldLine(g, mouseCoordinats.x + ":" + mouseCoordinats.y, 50, 10, Color.BLACK);
 	}
 	
-	public void update(double timePassed) {
-		map.update(timePassed);
+	public void update(){
+		map.update();
 		
-		if(up) translationY += (timePassed / 5.0);
-		if(down) translationY -= (timePassed / 5.0);
-		if(left) translationX += (timePassed / 5.0);
-		if(right) translationX -= (timePassed / 5.0);
+		if(up) translationY += 5.0;
+		if(down) translationY -= 5.0;
+		if(left) translationX += 5.0;
+		if(right) translationX -= 5.0;
 	}
 	
 	public void mouseReleased(MouseEvent e) {

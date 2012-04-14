@@ -18,22 +18,27 @@ public class Map{
 		generateMap();
 	}
 	
-	public void update(double timePassed){
+	public void update(){
 		for(Entity e: entities){
-			e.update(timePassed);
+			e.update();
 		}
 	}
 	
 	public void generateMap(){
+		long then = System.currentTimeMillis();
+		
 		for(int x = 0; x < getWidth(); x++){
 			for(int y = 0; y < getWidth(); y++){
-				float noise = PerlinNoise2D.perlinNoise(x, y, 0.4f, 32f, 4);
+				float noise = PerlinNoise2D.perlinNoise(x, y, 0.3f, 32f, 4);
+				//double noise = SimplexNoise.noise(x / 64f, y / 64f);
 				
 				if(noise > 0) surface[x][y] = Tile.grass1;
-				else if(noise > -0.1f) surface[x][y] = Tile.sand1;
+				else if(noise > -0.2f) surface[x][y] = Tile.sand1;
 				else surface[x][y] = Tile.water1;
 			}
 		}
+		
+		System.out.println(System.currentTimeMillis() - then);
 	}
 	
 	public void render(Graphics g, Point translation, Dimension screenSize){

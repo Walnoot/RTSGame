@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Images{
-	public static BufferedImage[][] terrain = split(load("/terrain.png"), 16, 16);
+	public static BufferedImage[][] terrain = split(load("/terrain.gif"), 16, 16);
 	
 	public static BufferedImage load(String fileName){
 		try {

@@ -33,12 +33,12 @@ public class MainMenu extends MenuScreen{
 		return result;
 	}
 	
-	public void update(double timePassed){
-		super.update(timePassed);
+	public void update(){
+		super.update();
 		//title.update(timePassed);
 		
 		if(buttonTransparancy < 1.0f){
-			buttonTransparancy += (float)timePassed / 1000;
+			buttonTransparancy += (float) RTSComponent.MS_PER_TICK / 1000;
 		}
 		if(buttonTransparancy > 1.0f){
 			buttonTransparancy = 1.0f;

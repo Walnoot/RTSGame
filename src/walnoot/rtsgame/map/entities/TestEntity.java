@@ -31,8 +31,8 @@ public class TestEntity extends MovingEntity{
 		Screen.font.drawBoldLine(g, xPos + ":" + yPos, getPointOnScreen().x, getPointOnScreen().y - 8, Color.BLACK);
 	}
 	
-	public void update(double timePassed){
-		super.update(timePassed);
+	public void update(){
+		super.update();
 		
 		//if(!isMoving()) moveRandomLocation();
 	}

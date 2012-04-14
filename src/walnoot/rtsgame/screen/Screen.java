@@ -39,9 +39,8 @@ public abstract class Screen{
 	public abstract void render(Graphics g);
 	
 	/**Update Method
-	 * @param timePassed De tijd tussen de laatste update, in milliseconden
 	 */
-	public abstract void update(double timePassed); 
+	public abstract void update(); 
 	
 	/** @param transparancy hoe transparant, max 1.0, min 0.0 */
 	public void makeTransparant(Graphics g, float transparancy){
