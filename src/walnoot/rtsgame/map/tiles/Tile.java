@@ -40,39 +40,6 @@ public class Tile {
 		
 		g.setColor(Color.BLACK);
 		g.drawImage(image, x, y, null);
-		
-		/*g.drawLine(x, y + 8, x + 16, y);
-		g.drawLine(x + 16, y, x, y - 8);*/
-		
-		//Screen.font.drawBoldLine(g, String.format("%d:%d", position.x, position.y), x + 8, y, Color.WHITE);
-		
-		//vanaf hier worden kustlijnen gerendert
-		
-		/*if(id == water1.id) return;
-		
-		Direction[] directions = {Direction.SOUTH_EAST, Direction.SOUTH_WEST, Direction.NORTH_WEST, Direction.NORTH_EAST};
-		
-		for(int i = 0; i < directions.length; i++){
-			Direction direction = directions[i];
-			
-			if(direction.getTile(map, position) != null && direction.getTile(map, position).id == water1.id){
-				g.drawImage(getImage(2, 1 + i), x, y, null);
-			}
-		}
-		
-		Direction[] corners = {Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.SOUTH};
-		
-		for(int i = 0; i < corners.length; i++){
-			Direction direction = corners[i];
-			
-			if(direction.getTile(map, position) == null || direction.getTile(map, position).id != water1.id) continue;
-			
-			try{
-				if(directions[i].getTile(map, position).id != water1.id && directions[(i + 1) % 4].getTile(map, position).id != water1.id ){
-					g.drawImage(getImage(3, 1 + i), x, y, null);
-				}
-			}catch(NullPointerException e){}
-		}*/
 	}
 	
 	public Point getPointOnScreen(Point coordinats){

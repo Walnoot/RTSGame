@@ -61,13 +61,19 @@ public class TitleScreen extends Screen{
 	
 	public void update() {
 		totalTime++;
-		if(totalTime > 2000 && !(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this));
+		if(totalTime > 200 && !(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this));
+		
+		boolean switchScreen = false;
 		
 		if(logoTransparancy < 1.0f){
-			logoTransparancy += 0.001;
-		}
-		if(logoTransparancy > 1.0f){
+			logoTransparancy += (float) RTSComponent.MS_PER_TICK / 2000;
+		}else{
 			logoTransparancy = 1.0f;
+			switchScreen = true;
+		}
+		
+		if(switchScreen){
+			if(!(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this));
 		}
 	}
 }
