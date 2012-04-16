@@ -6,21 +6,34 @@ import java.awt.Point;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import walnoot.rtsgame.map.entities.Entity;
-import walnoot.rtsgame.map.tiles.Tile;
+import walnoot.rtsgame.map.buildings.*;
+import walnoot.rtsgame.map.entities.*;
+import walnoot.rtsgame.map.tiles.*;
 
 public class Map{
 	private Tile[][] surface;
 	private Set<Entity> entities = new LinkedHashSet<Entity>();
+	public Building[][] buildings;
+	public SelectBar selectBar = new SelectBar(this);
 	
 	public Map(int mapSize){
 		surface = new Tile[mapSize][mapSize];
+		buildings = new Building [mapSize][mapSize];
 		generateMap();
 	}
 	
-	public void update(){
+	public void update(Point mousePos, boolean mouseIsDown, int translationX, int translationY){
 		for(Entity e: entities){
 			e.update();
+		}
+		
+		selectBar.update(mousePos, mouseIsDown, translationX, translationY);
+		for(int x = 1; x < getWidth()-1; x++){
+			for(int y = 1; y < getWidth()-1; y++){
+				if(getBuilding(x,y)!=null){
+					buildings[x][y].update(mousePos, mouseIsDown);
+				}
+			}
 		}
 	}
 	
@@ -37,6 +50,11 @@ public class Map{
 				else surface[x][y] = Tile.water1;
 			}
 		}
+		for(int x = 0; x < getWidth(); x++){
+			for(int y = 0; y < getWidth(); y++){
+				buildings[x][y] = null;
+			}
+		}
 		
 		//System.out.println(System.currentTimeMillis() - then);
 	}
@@ -49,12 +67,21 @@ public class Map{
 				getTile(x, y).render(g, screenSize, translation, new Point(x, y));
 			}
 		}
+		for(int x = 0; x < getWidth(); x++){
+			for(int y = 0; y < getHeigth(); y++){
+				if(getBuilding(x,y)!=null){
+					getBuilding(x, y).render(g, screenSize, translation, new Point(x, y));
+				}
+				
+			}
+		}
 		
 		for(Entity e: entities){
 			e.render(g);
 		}
 		
 		g.translate(-translation.x, -translation.y);
+		selectBar.render(g);
 	}
 	
 	public boolean isSolid(Point pos){
@@ -78,11 +105,34 @@ public class Map{
 		
 		return null;
 	}
+
+	public void deleteBuilding(int x,int y){
+		if(x > 0 && x < getHeigth() && y > 0 && y < getWidth()){
+			buildings[x][y]=null;
+		}
+	}
+
+	public void addBuilding(Building b, int x, int y){
+		if(x > 0 && x < getHeigth() && y > 0 && y < getWidth()){
+			if(!surface[x][y].isSolid()&& buildings[x][y] == null){
+				buildings[x][y]=b;
+			}
+		}
+		
+	}
 	
 	public Tile getTile(int x, int y){
 		try{
 			return surface[x][y];
 		}catch(ArrayIndexOutOfBoundsException e){
+			return null;
+		}
+	}
+
+	public Building getBuilding(int x, int y){
+		try{
+		return (buildings[x][y]);
+		}catch(Exception e){
 			return null;
 		}
 	}

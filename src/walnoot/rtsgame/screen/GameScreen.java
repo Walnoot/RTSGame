@@ -15,6 +15,9 @@ public class GameScreen extends Screen{
 	private Map map;
 	private double translationX, translationY;
 	private boolean up, down, left, right;
+	private Point mousePos = new Point(0,0);
+	boolean mouseIsDown = false;
+	boolean mousePressed = false;
 	
 	private Point mouseCoordinats = new Point();
 	private TestEntity player;
@@ -25,7 +28,12 @@ public class GameScreen extends Screen{
 		super(component);
 		
 		map = new Map(256);
-		player = new TestEntity(map, 4, 4, null);
+		for(int i = 4;; i++){
+			if(!map.getTile(4, i).isSolid()){
+				player = new TestEntity(map, 4,i,null);
+				break;
+			}
+		}
 		map.addEntity(player);
 		
 		tribe = new Tribe("My Tribe", Color.BLUE);
@@ -43,7 +51,7 @@ public class GameScreen extends Screen{
 	}
 	
 	public void update(){
-		map.update();
+		map.update( mousePos, mousePressed, (int)translationX,(int)translationY);
 		
 		if(up) translationY += 5.0;
 		if(down) translationY -= 5.0;
@@ -52,7 +60,10 @@ public class GameScreen extends Screen{
 	}
 	
 	public void mouseReleased(MouseEvent e) {
-		player.moveTo(mouseCoordinats);
+		if(!(map.selectBar.isInBar(mousePos))){
+			player.moveTo(mouseCoordinats);
+		}
+		mousePressed = false;
 	}
 	
 	public void mouseMoved(MouseEvent e) {
@@ -61,8 +72,17 @@ public class GameScreen extends Screen{
 		
 		int x = (int)((mouseY / 16.0) - (mouseX / 32.0));
 		int y = (int)((mouseY / 16.0) + (mouseX / 32.0));
-		
+		mousePos = e.getPoint();
 		mouseCoordinats.setLocation(x, y);
+	}
+	
+	public void mouseDragged(MouseEvent e){
+		mousePos = e.getPoint();
+	}
+	
+	public void mousePressed(MouseEvent e){
+		mousePressed = true;
+		mousePos = e.getPoint();
 	}
 	
 	public void keyPressed(KeyEvent e) {
