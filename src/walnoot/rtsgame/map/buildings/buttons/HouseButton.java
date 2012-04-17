@@ -43,7 +43,6 @@ private Building house;
 	
 	public void update(Point mousePos, boolean mouseIsDown,int translationX,int  translationY, boolean isInBar){
 		if(isSelected && mouseIsDown){
-			//System.out.println(mousePos);
 			if(!isInBar){
 				map.addBuilding(house, screenToMap(translationX,translationY, mousePos).x, screenToMap(translationX,translationY,mousePos).y);
 			}

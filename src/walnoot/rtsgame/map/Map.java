@@ -102,7 +102,6 @@ public class Map{
 		for(Entity e: entities){
 			if(e.getxPos() == x && e.getyPos() == y) return e;
 		}
-		
 		return null;
 	}
 
@@ -118,7 +117,6 @@ public class Map{
 				buildings[x][y]=b;
 			}
 		}
-		
 	}
 	
 	public Tile getTile(int x, int y){

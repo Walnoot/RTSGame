@@ -49,8 +49,6 @@ public class RoadButton extends BuildingButtons{
 			}
 		}
 		
-		
-		
 		public void isSelected(){
 			isSelected = true;
 		}

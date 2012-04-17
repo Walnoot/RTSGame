@@ -7,7 +7,13 @@ import javax.imageio.ImageIO;
 
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.map.*;
-
+/** een BuildingButton is een knopje voor op de SelectBar.
+ * een BuildingButton genereerd de bijbehorende Building
+ * bevat:			:
+ * -HouseButton
+ * -LargeHouseButton
+ * -RoadButton
+ * -TrashButton*/
 public abstract class BuildingButtons {
 	BufferedImage Button;
 	
