@@ -1,8 +1,6 @@
 package walnoot.rtsgame.map;
 
-import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
