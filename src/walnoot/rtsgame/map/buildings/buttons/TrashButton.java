@@ -25,7 +25,7 @@ public class TrashButton extends BuildingButtons {
 		this.widthButton = widthButton;
 		this.heightButton = heightButton;
 		try{
-			trashButton = ImageIO.read(this.getClass().getResource("/buttontrash2.png"));
+			trashButton = Images.buttons[1][0];
 		}catch(Exception e){
 			System.out.println("roadbutton picture not available?!");
 		}

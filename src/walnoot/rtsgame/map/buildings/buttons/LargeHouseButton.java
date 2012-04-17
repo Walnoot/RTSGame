@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import walnoot.rtsgame.Images;
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.buildings.Building;
@@ -28,7 +29,7 @@ public class LargeHouseButton extends BuildingButtons{
 			this.widthButton = widthButton;
 			this.heightButton = heightButton;
 			try{
-				largeHouseButton = ImageIO.read(this.getClass().getResource("/buttonlargehouse2.png"));
+				largeHouseButton = Images.buttons[2][0];
 			}catch(Exception e){
 				System.out.println("largehousebutton picture not available?!");
 			}

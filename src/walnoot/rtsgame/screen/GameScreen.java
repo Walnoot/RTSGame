@@ -77,7 +77,13 @@ public class GameScreen extends Screen{
 	}
 	
 	public void mouseDragged(MouseEvent e){
+		int mouseX = (int) ((e.getX() - 32) / RTSComponent.SCALE - translationX);
+		int mouseY = (int) (e.getY() / RTSComponent.SCALE - translationY);
+		
+		int x = (int)((mouseY / 16.0) - (mouseX / 32.0));
+		int y = (int)((mouseY / 16.0) + (mouseX / 32.0));
 		mousePos = e.getPoint();
+		mouseCoordinats.setLocation(x, y);
 	}
 	
 	public void mousePressed(MouseEvent e){

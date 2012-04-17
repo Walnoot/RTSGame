@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import walnoot.rtsgame.Images;
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.buildings.Building;
@@ -27,7 +28,7 @@ public class RoadButton extends BuildingButtons{
 			this.widthButton = widthButton;
 			this.heightButton = heightButton;
 			try{
-				roadButton = ImageIO.read(this.getClass().getResource("/buttonroad2.png"));
+				roadButton = Images.buttons[3][0];
 			}catch(Exception e){
 				System.out.println("roadbutton picture not available?!");
 			}
