@@ -11,7 +11,7 @@ import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.screen.menus.MainMenu;
 
 //laat het logo paar seconden zien, switcht daarna naar menu
-public class TitleScreen extends Screen{
+public class TitleScreen extends Screen {
 	private int totalTime;
 	private BufferedImage grass;
 	private BufferedImage grass2;
@@ -19,17 +19,17 @@ public class TitleScreen extends Screen{
 	private float logoTransparancy = 0.2f; //hoe transparant het logo is, max. 1.0
 	private boolean[][] tiles = new boolean[20][20];
 	
-	public TitleScreen(RTSComponent game) {
+	public TitleScreen(RTSComponent game){
 		super(game);
-		try {
+		try{
 			grass = ImageIO.read(this.getClass().getResource("/grass.png"));
 			grass2 = ImageIO.read(this.getClass().getResource("/grass2.png"));
 			logo = ImageIO.read(this.getClass().getResource("/logo2.png"));
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 		
-		Random random  = new Random();
+		Random random = new Random();
 		
 		for(int x = 0; x < 20; x++){
 			for(int y = 0; y < 20; y++){
@@ -39,7 +39,7 @@ public class TitleScreen extends Screen{
 		}
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g){
 		for(int x = 0; x < tiles.length; x++){
 			for(int y = 0; y < tiles[x].length; y++){
 				if(tiles[x][y]){
@@ -59,7 +59,7 @@ public class TitleScreen extends Screen{
 		//g.drawString(""+totalTime, 30, 30);
 	}
 	
-	public void update() {
+	public void update(){
 		totalTime++;
 		if(totalTime > 200 && !(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this));
 		

@@ -9,35 +9,36 @@ import javax.swing.JOptionPane;
 
 public class PerlinNoise2D {
 	private static int seed = new Random().nextInt();
-
+	
 	private static float noise(int x, int y){
 		int i = x + y * 57;
 		i += seed;
 		
 		i = (i << 13) ^ i;
-		return ( 1.0f - ( (i * (i * i * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0f);
+		return (1.0f - ((i * (i * i * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0f);
 	}
 	
-	/*private static float smoothNoise(int x, int y){
-		float corners = (noise(x - 1, y - 1) + noise(x + 1, y - 1) + noise(x - 1, y + 1) + noise(x + 1, y + 1)) / 16f;
-		float sides = (noise(x - 1, y) + noise(x + 1, y) + noise(x, y + 1) + noise(x, y - 1)) / 8f;
-		float center = noise(x, y) / 4f;
-		
-		return center + sides + corners;
-	}*/
-	
+	/*
+	 * private static float smoothNoise(int x, int y){ float corners = (noise(x
+	 * - 1, y - 1) + noise(x + 1, y - 1) + noise(x - 1, y + 1) + noise(x + 1, y
+	 * + 1)) / 16f; float sides = (noise(x - 1, y) + noise(x + 1, y) + noise(x,
+	 * y + 1) + noise(x, y - 1)) / 8f; float center = noise(x, y) / 4f;
+	 * 
+	 * return center + sides + corners; }
+	 */
+
 	private static float interpolate(float a, float b, float x){
 		float ft = (float) (x * Math.PI);
 		float i = (float) ((1 - Math.cos(ft)) * .5);
 		
-		return a * (1- i) + (b * i);
+		return a * (1 - i) + (b * i);
 	}
 	
 	private static float interpolatedNoise(float x, float y){
-		int intX = (int)x;
+		int intX = (int) x;
 		float fracX = x - intX;
 		
-		int intY = (int)y;
+		int intY = (int) y;
 		float fracY = y - intY;
 		
 		float a = noise(intX, intY);
@@ -75,37 +76,34 @@ public class PerlinNoise2D {
 		return result;
 	}
 	
-	/*public static void main(String[] args) throws IOException{
-		boolean running = false;
-		
-		do{
-			seed = new Random().nextInt();
-			
-			running = false;
-			
-			BufferedImage result = new BufferedImage(1280, 960, BufferedImage.TYPE_INT_RGB);
-			//BufferedImage result = new BufferedImage(512, 512, BufferedImage.TYPE_INT_RGB);
-			
-			float persistence = 0.4f;
-			int numberOctaves = 4;
-			float zoomlevel = 64f;
-			
-			for(int x = 0; x < result.getWidth(); x++){
-				for(int y = 0; y < result.getHeight(); y++){
-					float value = perlinNoise(x, y, persistence, zoomlevel, numberOctaves);
-					
-					int color = (int) (value * 128);
-					color = color << 22;
-					
-					result.setRGB(x, y, color);
-				}
-			}
-			
-			//ImageIO.write(result, "PNG", new File("output.png"));
-			
-			int option = JOptionPane.showConfirmDialog(null, null, "jisdfrawe", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, new ImageIcon(result));
-			
-			if(option == JOptionPane.OK_OPTION) running = true;
-		}while(running);
-	}*/
+	/*
+	 * public static void main(String[] args) throws IOException{ boolean
+	 * running = false;
+	 * 
+	 * do{ seed = new Random().nextInt();
+	 * 
+	 * running = false;
+	 * 
+	 * BufferedImage result = new BufferedImage(1280, 960,
+	 * BufferedImage.TYPE_INT_RGB); //BufferedImage result = new
+	 * BufferedImage(512, 512, BufferedImage.TYPE_INT_RGB);
+	 * 
+	 * float persistence = 0.4f; int numberOctaves = 4; float zoomlevel = 64f;
+	 * 
+	 * for(int x = 0; x < result.getWidth(); x++){ for(int y = 0; y <
+	 * result.getHeight(); y++){ float value = perlinNoise(x, y, persistence,
+	 * zoomlevel, numberOctaves);
+	 * 
+	 * int color = (int) (value * 128); color = color << 22;
+	 * 
+	 * result.setRGB(x, y, color); } }
+	 * 
+	 * //ImageIO.write(result, "PNG", new File("output.png"));
+	 * 
+	 * int option = JOptionPane.showConfirmDialog(null, null, "jisdfrawe",
+	 * JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, new
+	 * ImageIcon(result));
+	 * 
+	 * if(option == JOptionPane.OK_OPTION) running = true; }while(running); }
+	 */
 }

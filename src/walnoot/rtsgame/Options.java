@@ -20,8 +20,8 @@ public class Options {
 		File file = new File(fileName);
 		
 		try{
-			FileOutputStream file_output = new FileOutputStream (file);
-			DataOutputStream data_out = new DataOutputStream (file_output);
+			FileOutputStream file_output = new FileOutputStream(file);
+			DataOutputStream data_out = new DataOutputStream(file_output);
 			
 			data_out.writeInt(window_width);
 			data_out.writeInt(window_height);
@@ -42,7 +42,7 @@ public class Options {
 			//hiermee kun je date op files schrijven
 			FileInputStream file_input = new FileInputStream(file);
 			DataInputStream data_in = new DataInputStream(file_input);
-		
+			
 			try{
 				window_width = data_in.readInt();
 				window_height = data_in.readInt();
@@ -51,7 +51,7 @@ public class Options {
 			}catch(EOFException e){ //als hij bij het einde van de file is
 				System.out.println("end of file");
 			}
-		
+			
 		}catch(Exception e){
 			System.out.println("Error! : " + e);
 		}

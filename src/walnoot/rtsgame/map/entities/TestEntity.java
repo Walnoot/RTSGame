@@ -9,7 +9,7 @@ import walnoot.rtsgame.map.tribes.NameGenerator;
 import walnoot.rtsgame.map.tribes.Tribe;
 import walnoot.rtsgame.screen.Screen;
 
-public class TestEntity extends MovingEntity{
+public class TestEntity extends MovingEntity {
 	private Random random;
 	private String name;
 	

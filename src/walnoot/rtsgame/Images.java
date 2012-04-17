@@ -5,14 +5,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Images{
+public class Images {
 	public static BufferedImage[][] terrain = split(load("/terrain2.png"), 16, 16);
-	public static BufferedImage[][] buttons = split(load("/buttons.png"),10,10);
+	public static BufferedImage[][] buttons = split(load("/buttons.png"), 10, 10);
 	
 	public static BufferedImage load(String fileName){
-		try {
+		try{
 			return ImageIO.read(Images.class.getResource(fileName));
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 		return null;

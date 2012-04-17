@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
-
 public class NameGenerator {
 	private String[] consonants, vowels;
 	private Random random;

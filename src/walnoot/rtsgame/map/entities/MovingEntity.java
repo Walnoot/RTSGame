@@ -8,13 +8,13 @@ import walnoot.rtsgame.map.Direction;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tribes.Tribe;
 
-public abstract class MovingEntity extends Entity{
+public abstract class MovingEntity extends Entity {
 	protected double timeTraveled; //hoelang hij onderweg is
 	protected Direction direction = Direction.EAST;
 	
 	private LinkedList<Direction> nextDirections = new LinkedList<Direction>();
 	
-	public MovingEntity(Map map, int xPos, int yPos, Tribe tribe) {
+	public MovingEntity(Map map, int xPos, int yPos, Tribe tribe){
 		super(map, xPos, yPos, tribe);
 	}
 	
@@ -39,7 +39,7 @@ public abstract class MovingEntity extends Entity{
 			xPos += direction.getxOffset();
 			yPos += direction.getyOffset();
 			
-			if(!nextDirections.isEmpty())nextDirections.remove(0);
+			if(!nextDirections.isEmpty()) nextDirections.remove(0);
 		}
 	}
 	
@@ -52,7 +52,7 @@ public abstract class MovingEntity extends Entity{
 		return !nextDirections.isEmpty();
 	}
 	
-	public Point getPointOnScreen() {
+	public Point getPointOnScreen(){
 		int x = super.getPointOnScreen().x;
 		int y = super.getPointOnScreen().y;
 		
@@ -66,6 +66,6 @@ public abstract class MovingEntity extends Entity{
 		return new Point(x, y);
 	}
 	
-	/**@return tijd die het duurt om over 1 tile te bewegen*/
+	/** @return tijd die het duurt om over 1 tile te bewegen */
 	protected abstract double getTravelTime();
 }

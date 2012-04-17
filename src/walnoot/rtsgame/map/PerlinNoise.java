@@ -11,23 +11,23 @@ public class PerlinNoise {
 	
 	public static float noise(int i){
 		i = (i << 13) ^ i;
-		return ( 1.0f - ( (i * (i * i * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0f);
+		return (1.0f - ((i * (i * i * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0f);
 	}
 	
 	public static float smoothNoise(int x){
 		x += seed;
-		return noise(x) / 2 + noise(x - 1) / 4  + noise(x + 1) / 4;
+		return noise(x) / 2 + noise(x - 1) / 4 + noise(x + 1) / 4;
 	}
 	
 	public static float interpolate(float a, float b, float x){
 		float ft = (float) (x * Math.PI);
 		float i = (float) ((1 - Math.cos(ft)) * .5);
 		
-		return a * (1- i) + (b * i);
+		return a * (1 - i) + (b * i);
 	}
 	
 	public static float interpolatedNoise(float x){
-		int integerX = (int)x;
+		int integerX = (int) x;
 		float fractional = x - integerX;
 		
 		return interpolate(smoothNoise(integerX), smoothNoise(integerX + 1), fractional);
@@ -55,7 +55,6 @@ public class PerlinNoise {
 				
 				value += interpolatedNoise(x / 32f * frequency) * (128 * amplitude);
 			}
-			
 			
 			for(int y = value; y < result.getHeight(); y++){
 				try{

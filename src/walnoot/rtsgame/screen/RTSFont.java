@@ -63,7 +63,7 @@ public class RTSFont {
 		return width;
 	}
 	
-	private class Char{
+	private class Char {
 		private boolean[][] pixels;
 		
 		private Char(BufferedImage charImage){

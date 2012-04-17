@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
 
-public class RTSComponent extends Canvas implements Runnable, KeyListener, MouseListener, MouseMotionListener{
+public class RTSComponent extends Canvas implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
 	public static final double MS_PER_TICK = 1000.0 / 60.0;
 	
@@ -42,7 +42,7 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 		addMouseMotionListener(this);
 		setIgnoreRepaint(true);
 		
-		if(! new File(Options.fileName).exists()) Options.writeOptions();
+		if(!new File(Options.fileName).exists()) Options.writeOptions();
 		Options.loadOptions();
 	}
 	
@@ -57,7 +57,7 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 		screen.render(g);
 		
 		BufferStrategy bs = getBufferStrategy();
-		if (bs == null) {
+		if(bs == null){
 			createBufferStrategy(2);
 			return;
 		}
@@ -78,10 +78,9 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 		
 		int numTicks = 0, numFrames = 0;
 		
-		
 		if(Options.startFullScreen) fullScreenManager.setFullScreen();
 		
-		while(running ){
+		while(running){
 			long timePassed = System.nanoTime() - totalTime; //hoeveel tijd er verstreken is sinds de vorige update
 			totalTime += timePassed;
 			tickTime += timePassed / 1000000.0;
@@ -112,9 +111,9 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 			
 			fullScreenManager.update();
 			
-			try {
+			try{
 				Thread.sleep(1);
-			} catch (InterruptedException e) {
+			}catch(InterruptedException e){
 				e.printStackTrace();
 			}
 		}
@@ -139,36 +138,45 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 		Options.writeOptions();
 	}
 	
-	public void mouseDragged(MouseEvent e) {
+	public void mouseDragged(MouseEvent e){
 		if(screen != null) screen.mouseDragged(e);
 	}
-	public void mouseMoved(MouseEvent e) {
+	
+	public void mouseMoved(MouseEvent e){
 		if(screen != null) screen.mouseMoved(e);
 	}
-	public void mouseClicked(MouseEvent e) {
+	
+	public void mouseClicked(MouseEvent e){
 		if(screen != null) screen.mouseClicked(e);
 	}
-	public void mouseEntered(MouseEvent e) {
+	
+	public void mouseEntered(MouseEvent e){
 		if(screen != null) screen.mouseEntered(e);
 	}
-	public void mouseExited(MouseEvent e) {
+	
+	public void mouseExited(MouseEvent e){
 		if(screen != null) screen.mouseExited(e);
 	}
-	public void mousePressed(MouseEvent e) {
+	
+	public void mousePressed(MouseEvent e){
 		if(screen != null) screen.mousePressed(e);
 	}
-	public void mouseReleased(MouseEvent e) {
+	
+	public void mouseReleased(MouseEvent e){
 		if(screen != null) screen.mouseReleased(e);
 	}
-	public void keyPressed(KeyEvent e) {
+	
+	public void keyPressed(KeyEvent e){
 		if(screen != null) screen.keyPressed(e);
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) stop();
 		if(e.getKeyCode() == KeyEvent.VK_F11) fullScreenManager.switchFullScreen();
 	}
-	public void keyReleased(KeyEvent e) {
+	
+	public void keyReleased(KeyEvent e){
 		if(screen != null) screen.keyReleased(e);
 	}
-	public void keyTyped(KeyEvent e) {
+	
+	public void keyTyped(KeyEvent e){
 		if(screen != null) screen.keyTyped(e);
 	}
 	
@@ -187,9 +195,9 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 		
 		while(comp.running){
 			frame.setTitle("Tribe (" + comp.fps + ")");
-			try {
+			try{
 				Thread.sleep(500L);
-			} catch (InterruptedException e) {
+			}catch(InterruptedException e){
 			}
 		}
 	}

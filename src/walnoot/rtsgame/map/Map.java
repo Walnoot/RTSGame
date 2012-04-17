@@ -10,7 +10,7 @@ import walnoot.rtsgame.map.buildings.*;
 import walnoot.rtsgame.map.entities.*;
 import walnoot.rtsgame.map.tiles.*;
 
-public class Map{
+public class Map {
 	private Tile[][] surface;
 	private Set<Entity> entities = new LinkedHashSet<Entity>();
 	public Building[][] buildings;
@@ -18,7 +18,7 @@ public class Map{
 	
 	public Map(int mapSize){
 		surface = new Tile[mapSize][mapSize];
-		buildings = new Building [mapSize][mapSize];
+		buildings = new Building[mapSize][mapSize];
 		generateMap();
 	}
 	
@@ -28,9 +28,9 @@ public class Map{
 		}
 		
 		selectBar.update(mousePos, mouseIsDown, translationX, translationY);
-		for(int x = 1; x < getWidth()-1; x++){
-			for(int y = 1; y < getWidth()-1; y++){
-				if(getBuilding(x,y)!=null){
+		for(int x = 1; x < getWidth() - 1; x++){
+			for(int y = 1; y < getWidth() - 1; y++){
+				if(getBuilding(x, y) != null){
 					buildings[x][y].update(mousePos, mouseIsDown);
 				}
 			}
@@ -69,7 +69,7 @@ public class Map{
 		}
 		for(int x = 0; x < getWidth(); x++){
 			for(int y = 0; y < getHeigth(); y++){
-				if(getBuilding(x,y)!=null){
+				if(getBuilding(x, y) != null){
 					getBuilding(x, y).render(g, screenSize, translation, new Point(x, y));
 				}
 				
@@ -104,17 +104,17 @@ public class Map{
 		}
 		return null;
 	}
-
-	public void deleteBuilding(int x,int y){
+	
+	public void deleteBuilding(int x, int y){
 		if(x > 0 && x < getHeigth() && y > 0 && y < getWidth()){
-			buildings[x][y]=null;
+			buildings[x][y] = null;
 		}
 	}
-
+	
 	public void addBuilding(Building b, int x, int y){
 		if(x > 0 && x < getHeigth() && y > 0 && y < getWidth()){
-			if(!surface[x][y].isSolid()&& buildings[x][y] == null){
-				buildings[x][y]=b;
+			if(!surface[x][y].isSolid() && buildings[x][y] == null){
+				buildings[x][y] = b;
 			}
 		}
 	}
@@ -126,10 +126,10 @@ public class Map{
 			return null;
 		}
 	}
-
+	
 	public Building getBuilding(int x, int y){
 		try{
-		return (buildings[x][y]);
+			return (buildings[x][y]);
 		}catch(Exception e){
 			return null;
 		}

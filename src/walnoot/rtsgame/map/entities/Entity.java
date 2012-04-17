@@ -21,9 +21,11 @@ public abstract class Entity {
 	}
 	
 	public abstract void update();
+	
 	public abstract void render(Graphics g);
 	
 	public abstract int getMaxHealth();
+	
 	public abstract String getName();
 	
 	public int getHealth(){
@@ -62,7 +64,7 @@ public abstract class Entity {
 	}
 	
 	public boolean isRemoved(){
-		if(health <= 0)	 return true;
+		if(health <= 0) return true;
 		return removed;
 	}
 	

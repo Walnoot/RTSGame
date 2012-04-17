@@ -9,25 +9,21 @@ import java.awt.image.BufferedImage;
 import walnoot.rtsgame.Images;
 import walnoot.rtsgame.map.Map;
 
-public class RoadBuilding extends Building{
+public class RoadBuilding extends Building {
 	BufferedImage road;
 	Map map;
-	int xPos,yPos;
+	int xPos, yPos;
 	
 	public RoadBuilding(int xPos, int yPos, Map map){
-		road = getImage(4,0);
+		road = getImage(4, 0);
 		this.map = map;
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}
 	
-	
 	public BufferedImage getImage(int x, int y){
 		return Images.terrain[x][y];
 	}
-	
-	
-	
 	
 	public void render(Graphics g, Dimension screenSize, Point translation, Point position){
 		int x = getPointOnScreen(position).x;
@@ -38,8 +34,7 @@ public class RoadBuilding extends Building{
 		
 		g.setColor(Color.BLACK);
 		
-		
-		g.drawImage(road, x,y, null);
+		g.drawImage(road, x, y, null);
 	}
 	
 	public Point getPointOnScreen(Point coordinats){
@@ -49,30 +44,30 @@ public class RoadBuilding extends Building{
 		return new Point(x, y);
 	}
 	
-	public void update(Point posMouse, boolean mouseIsDown) {
+	public void update(Point posMouse, boolean mouseIsDown){
 		int roadVersion = 1;
 		int idNE;
-		if(map.buildings[xPos-1][yPos]!=null) idNE = map.buildings[xPos-1][yPos].getID();
+		if(map.buildings[xPos - 1][yPos] != null) idNE = map.buildings[xPos - 1][yPos].getID();
 		else idNE = 0;
 		int idNW;
-		if(map.buildings[xPos][yPos+1]!=null) idNW = map.buildings[xPos][yPos+1].getID();
+		if(map.buildings[xPos][yPos + 1] != null) idNW = map.buildings[xPos][yPos + 1].getID();
 		else idNW = 0;
 		int idSW;
-		if(map.buildings[xPos+1][yPos]!=null) idSW = map.buildings[xPos+1][yPos].getID();
+		if(map.buildings[xPos + 1][yPos] != null) idSW = map.buildings[xPos + 1][yPos].getID();
 		else idSW = 0;
 		int idSE;
-		if(map.buildings[xPos][yPos-1]!=null) idSE = map.buildings[xPos][yPos-1].getID();
+		if(map.buildings[xPos][yPos - 1] != null) idSE = map.buildings[xPos][yPos - 1].getID();
 		else idSE = 0;
-		boolean NEIsRoad ; 
-		boolean SEIsRoad ; 
-		boolean SWIsRoad ; 
-		boolean NWIsRoad ;
+		boolean NEIsRoad;
+		boolean SEIsRoad;
+		boolean SWIsRoad;
+		boolean NWIsRoad;
 		boolean houseAv;
 		
-		if(idNE == 1) {
+		if(idNE == 1){
 			NEIsRoad = true;
 			houseAv = false;
-		}else if(idNE == 2) {
+		}else if(idNE == 2){
 			houseAv = true;
 			NEIsRoad = false;
 		}else{
@@ -86,9 +81,9 @@ public class RoadBuilding extends Building{
 		if(idSE == 1) SEIsRoad = true;
 		else SEIsRoad = false;
 		/*
-		 * kijkt welke soort weg ie moet renderen. 
+		 * kijkt welke soort weg ie moet renderen.
 		 */
-		if(NEIsRoad||houseAv||idNE==3){
+		if(NEIsRoad || houseAv || idNE == 3){
 			if(NWIsRoad){
 				if(SWIsRoad){
 					if(SEIsRoad){
@@ -149,13 +144,11 @@ public class RoadBuilding extends Building{
 				}
 			}
 		}
-		road=Images.terrain[4][roadVersion-1];
+		road = Images.terrain[4][roadVersion - 1];
 	}
-
-
 	
-	public int getID() {
+	public int getID(){
 		return 1;
 	}
-
+	
 }

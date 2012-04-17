@@ -9,7 +9,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 
-public class InputHandler implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener{
+public class InputHandler implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 	private ArrayList<Key> keylist = new ArrayList<Key>();
 	
 	public Key left = new Key(KeyEvent.VK_LEFT, KeyEvent.VK_A);

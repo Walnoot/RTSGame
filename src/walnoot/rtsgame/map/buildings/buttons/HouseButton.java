@@ -16,15 +16,15 @@ import walnoot.rtsgame.map.buildings.NoBuilding;
 import walnoot.rtsgame.screen.Screen;
 
 public class HouseButton extends BuildingButtons {
-BufferedImage houseButton;
-private Point placeOnScreen;
-private int widthButton;
-private int heightButton;
-public Map map;
-private boolean isSelected=false;
-private Building house;
+	BufferedImage houseButton;
+	private Point placeOnScreen;
+	private int widthButton;
+	private int heightButton;
+	public Map map;
+	private boolean isSelected = false;
+	private Building house;
 	
-	public HouseButton(Point placeOnScreen, int widthButton, int heightButton,Map map) {
+	public HouseButton(Point placeOnScreen, int widthButton, int heightButton, Map map){
 		this.map = map;
 		this.placeOnScreen = placeOnScreen;
 		this.widthButton = widthButton;
@@ -38,18 +38,17 @@ private Building house;
 	}
 	
 	public void render(Graphics g){
-		g.drawImage(houseButton,placeOnScreen.x,placeOnScreen.y,widthButton,heightButton ,null);
-		if(isSelected)g.fillRect( placeOnScreen.x, placeOnScreen.y, 4, 4);
+		g.drawImage(houseButton, placeOnScreen.x, placeOnScreen.y, widthButton, heightButton, null);
+		if(isSelected) g.fillRect(placeOnScreen.x, placeOnScreen.y, 4, 4);
 	}
 	
-	public void update(Point mousePos, boolean mouseIsDown,int translationX,int  translationY, boolean isInBar){
+	public void update(Point mousePos, boolean mouseIsDown, int translationX, int translationY, boolean isInBar){
 		if(isSelected && mouseIsDown){
 			if(!isInBar){
-				map.addBuilding(house, screenToMap(translationX,translationY, mousePos).x, screenToMap(translationX,translationY,mousePos).y);
+				map.addBuilding(house, screenToMap(translationX, translationY, mousePos).x, screenToMap(translationX, translationY, mousePos).y);
 			}
 		}
 	}
-	
 	
 	public void isSelected(){
 		isSelected = true;

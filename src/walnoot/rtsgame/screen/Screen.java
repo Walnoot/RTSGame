@@ -15,16 +15,19 @@ import javax.imageio.ImageIO;
 
 import walnoot.rtsgame.RTSComponent;
 
-/** Een Screen staat voor een deel van het spel, zoals het hoofdmenu, of game scherm*/
-public abstract class Screen{
+/**
+ * Een Screen staat voor een deel van het spel, zoals het hoofdmenu, of game
+ * scherm
+ */
+public abstract class Screen {
 	public RTSComponent component;
 	public static RTSFont font;
 	
 	public Screen(RTSComponent component){
 		this.component = component;
-		try {
+		try{
 			font = new RTSFont(ImageIO.read(this.getClass().getResource("/font.png")));
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
@@ -33,29 +36,32 @@ public abstract class Screen{
 		component.setScreen(screen);
 	}
 	
-	/**Render method, tekent op het scherm
+	/**
+	 * Render method, tekent op het scherm
+	 * 
 	 * @param g Object waarmee je kan tekenen
 	 */
 	public abstract void render(Graphics g);
 	
-	/**Update Method
+	/**
+	 * Update Method
 	 */
-	public abstract void update(); 
+	public abstract void update();
 	
 	/** @param transparancy hoe transparant, max 1.0, min 0.0 */
 	public void makeTransparant(Graphics g, float transparancy){
-		Graphics2D g2d = (Graphics2D)g;
-	    Composite alphaComp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transparancy);
-	    g2d.setComposite(alphaComp);
+		Graphics2D g2d = (Graphics2D) g;
+		Composite alphaComp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transparancy);
+		g2d.setComposite(alphaComp);
 	}
 	
 	public Point getMouseLocation(){
 		try{
 			return new Point(
-				(MouseInfo.getPointerInfo().getLocation().x - component.getLocationOnScreen().x) / RTSComponent.SCALE,
-				(MouseInfo.getPointerInfo().getLocation().y - component.getLocationOnScreen().y) / RTSComponent.SCALE);
+					(MouseInfo.getPointerInfo().getLocation().x - component.getLocationOnScreen().x) / RTSComponent.SCALE,
+					(MouseInfo.getPointerInfo().getLocation().y - component.getLocationOnScreen().y) / RTSComponent.SCALE);
 		}catch(Exception e){
-			return new Point(0,0);
+			return new Point(0, 0);
 		}
 	}
 	
@@ -75,14 +81,33 @@ public abstract class Screen{
 		return component.getHeight() / RTSComponent.SCALE;
 	}
 	
-	public void keyPressed(KeyEvent e) {}
-	public void keyReleased(KeyEvent e) {}
-	public void keyTyped(KeyEvent e) {}
-	public void mouseClicked(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {}
-	public void mouseExited(MouseEvent e) {}
-	public void mousePressed(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
-	public void mouseDragged(MouseEvent e) {}
-	public void mouseMoved(MouseEvent e) {}
+	public void keyPressed(KeyEvent e){
+	}
+	
+	public void keyReleased(KeyEvent e){
+	}
+	
+	public void keyTyped(KeyEvent e){
+	}
+	
+	public void mouseClicked(MouseEvent e){
+	}
+	
+	public void mouseEntered(MouseEvent e){
+	}
+	
+	public void mouseExited(MouseEvent e){
+	}
+	
+	public void mousePressed(MouseEvent e){
+	}
+	
+	public void mouseReleased(MouseEvent e){
+	}
+	
+	public void mouseDragged(MouseEvent e){
+	}
+	
+	public void mouseMoved(MouseEvent e){
+	}
 }

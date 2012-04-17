@@ -9,21 +9,18 @@ import java.awt.image.BufferedImage;
 import walnoot.rtsgame.*;
 import walnoot.rtsgame.map.Map;
 
-public class HouseBuilding extends Building{
+public class HouseBuilding extends Building {
 	BufferedImage house;
 	
 	public HouseBuilding(){
-		house = getImage(3,0);
+		house = getImage(3, 0);
 	}
-	
 	
 	public BufferedImage getImage(int x, int y){
 		return Images.terrain[x][y];
 	}
 	
-	
-	public void render(Graphics g, Dimension screenSize, Point translation, Point position) {
-		
+	public void render(Graphics g, Dimension screenSize, Point translation, Point position){
 		
 		int x = getPointOnScreen(position).x;
 		int y = getPointOnScreen(position).y;
@@ -42,15 +39,12 @@ public class HouseBuilding extends Building{
 		return new Point(x, y);
 	}
 	
-	public void update(Point posMouse, boolean mouseIsDown) {
+	public void update(Point posMouse, boolean mouseIsDown){
 		
 	}
-
-	public int getID() {
+	
+	public int getID(){
 		return 2;
 	}
-
-
-	
 	
 }

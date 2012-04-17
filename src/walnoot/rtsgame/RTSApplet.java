@@ -4,10 +4,10 @@ import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-public class RTSApplet extends Applet{
+public class RTSApplet extends Applet {
 	private static final long serialVersionUID = 1L;
 	private RTSComponent comp;
-
+	
 	public void init(){
 		setPreferredSize(new Dimension(800, 600));
 		setSize(new Dimension(800, 600));

@@ -17,8 +17,7 @@ public class LargeHouseBuilding extends Building {
 		}
 	}
 	
-	
-	public void render(Graphics g, Dimension screenSize, Point translation,Point position) {
+	public void render(Graphics g, Dimension screenSize, Point translation, Point position){
 		int x = getPointOnScreen(position).x;
 		int y = getPointOnScreen(position).y;
 		
@@ -27,8 +26,7 @@ public class LargeHouseBuilding extends Building {
 		
 		g.setColor(Color.BLACK);
 		
-		
-		g.drawImage(largeHouse, x-16,y-16, null);
+		g.drawImage(largeHouse, x - 16, y - 16, null);
 	}
 	
 	public Point getPointOnScreen(Point coordinats){
@@ -37,13 +35,13 @@ public class LargeHouseBuilding extends Building {
 		
 		return new Point(x, y);
 	}
-
-	public int getID() {
+	
+	public int getID(){
 		return ID;
 	}
-
-	public void update( Point posMouse, boolean mouseIsDown) {
+	
+	public void update(Point posMouse, boolean mouseIsDown){
 		
 	}
-
+	
 }

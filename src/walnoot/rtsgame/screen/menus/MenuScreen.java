@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.screen.Screen;
 
-public abstract class MenuScreen extends Screen{
+public abstract class MenuScreen extends Screen {
 	protected int selectedButton = 0;
 	
 	public MenuScreen(RTSComponent component){

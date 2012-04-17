@@ -11,11 +11,11 @@ import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.entities.TestEntity;
 import walnoot.rtsgame.map.tribes.Tribe;
 
-public class GameScreen extends Screen{
+public class GameScreen extends Screen {
 	private Map map;
 	private double translationX, translationY;
 	private boolean up, down, left, right;
-	private Point mousePos = new Point(0,0);
+	private Point mousePos = new Point(0, 0);
 	boolean mouseIsDown = false;
 	boolean mousePressed = false;
 	
@@ -24,13 +24,13 @@ public class GameScreen extends Screen{
 	
 	private Tribe tribe;
 	
-	public GameScreen(RTSComponent component) {
+	public GameScreen(RTSComponent component){
 		super(component);
 		
 		map = new Map(256);
 		for(int i = 4;; i++){
 			if(!map.getTile(4, i).isSolid()){
-				player = new TestEntity(map, 4,i,null);
+				player = new TestEntity(map, 4, i, null);
 				break;
 			}
 		}
@@ -51,7 +51,7 @@ public class GameScreen extends Screen{
 	}
 	
 	public void update(){
-		map.update( mousePos, mousePressed, (int)translationX,(int)translationY);
+		map.update(mousePos, mousePressed, (int) translationX, (int) translationY);
 		
 		if(up) translationY += 5.0;
 		if(down) translationY -= 5.0;
@@ -59,19 +59,19 @@ public class GameScreen extends Screen{
 		if(right) translationX -= 5.0;
 	}
 	
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(MouseEvent e){
 		if(!(map.selectBar.isInBar(mousePos))){
 			player.moveTo(mouseCoordinats);
 		}
 		mousePressed = false;
 	}
 	
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e){
 		int mouseX = (int) ((e.getX() - 32) / RTSComponent.SCALE - translationX);
 		int mouseY = (int) (e.getY() / RTSComponent.SCALE - translationY);
 		
-		int x = (int)((mouseY / 16.0) - (mouseX / 32.0));
-		int y = (int)((mouseY / 16.0) + (mouseX / 32.0));
+		int x = (int) ((mouseY / 16.0) - (mouseX / 32.0));
+		int y = (int) ((mouseY / 16.0) + (mouseX / 32.0));
 		mousePos = e.getPoint();
 		mouseCoordinats.setLocation(x, y);
 	}
@@ -80,8 +80,8 @@ public class GameScreen extends Screen{
 		int mouseX = (int) ((e.getX() - 32) / RTSComponent.SCALE - translationX);
 		int mouseY = (int) (e.getY() / RTSComponent.SCALE - translationY);
 		
-		int x = (int)((mouseY / 16.0) - (mouseX / 32.0));
-		int y = (int)((mouseY / 16.0) + (mouseX / 32.0));
+		int x = (int) ((mouseY / 16.0) - (mouseX / 32.0));
+		int y = (int) ((mouseY / 16.0) + (mouseX / 32.0));
 		mousePos = e.getPoint();
 		mouseCoordinats.setLocation(x, y);
 	}
@@ -91,14 +91,14 @@ public class GameScreen extends Screen{
 		mousePos = e.getPoint();
 	}
 	
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e){
 		if(e.getKeyCode() == KeyEvent.VK_UP) up = true;
 		if(e.getKeyCode() == KeyEvent.VK_DOWN) down = true;
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) left = true;
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) right = true;
 	}
 	
-	public void keyReleased(KeyEvent e) {
+	public void keyReleased(KeyEvent e){
 		if(e.getKeyCode() == KeyEvent.VK_UP) up = false;
 		if(e.getKeyCode() == KeyEvent.VK_DOWN) down = false;
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) left = false;

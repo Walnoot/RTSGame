@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import walnoot.rtsgame.map.Direction;
 import walnoot.rtsgame.map.Map;
 
-/**tekst en uitleg op http://www.policyalmanac.org/games/aStarTutorial.htm */
+/** tekst en uitleg op http://www.policyalmanac.org/games/aStarTutorial.htm */
 public class Pathfinder {
 	private static Direction[] directions = {Direction.NORTH, Direction.NORTH_EAST, Direction.EAST, Direction.SOUTH_EAST,
-		Direction.SOUTH, Direction.SOUTH_WEST, Direction.WEST, Direction.NORTH_WEST};
+			Direction.SOUTH, Direction.SOUTH_WEST, Direction.WEST, Direction.NORTH_WEST};
 	private final Map map;
 	private final Point goal;
 	private final Point start;
@@ -49,18 +49,18 @@ public class Pathfinder {
 		while(true){
 			try{
 				result.addFirst(node.getDirection());
-			}catch(NullPointerException e){}
+			}catch(NullPointerException e){
+			}
 			
 			if(node.parent != null){
 				node = node.parent;
-			}
-			else break;
+			}else break;
 		}
 		
 		return result;
 	}
 	
-	/**@return Node with lowest F value */
+	/** @return Node with lowest F value */
 	private Node getNodeLowestF(ArrayList<Node> openlist){
 		Node lowestF = openlist.get(0);
 		
@@ -79,7 +79,7 @@ public class Pathfinder {
 		return null;
 	}
 	
-	private class Node{
+	private class Node {
 		int g, h;
 		Node parent;
 		//private Point position;
@@ -106,7 +106,8 @@ public class Pathfinder {
 			try{
 				parentG += parent.g;
 				parentG += (getDirection().isDiagonal() ? 14 : 10);
-			}catch(NullPointerException e){}
+			}catch(NullPointerException e){
+			}
 			g = parentG;
 		}
 		
@@ -142,18 +143,18 @@ public class Pathfinder {
 				Point newPosition = dir.nextPoint(posX, posY);
 				
 				if(!map.isSolid(newPosition)){
-					/*if(newPosition.equals(goal)) {
-						finalNode = new Node(this, newPosition);
-						break;
-					}*/
-					
+					/*
+					 * if(newPosition.equals(goal)) { finalNode = new Node(this,
+					 * newPosition); break; }
+					 */
+
 					Node newNode = new Node(this, newPosition.x, newPosition.y);
 					
 					//if(getEqualNode(closedlist, newNode) != null) continue;
 					
 					Node openNode = getEqualNode(openlist, newNode);
 					if(openNode != null){
-						if(openNode.g > newNode.g) {
+						if(openNode.g > newNode.g){
 							openNode.parent = this;
 							openNode.calculateG();
 							openNode.calculateH();

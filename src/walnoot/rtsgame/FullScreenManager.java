@@ -39,12 +39,11 @@ public class FullScreenManager {
 		Window w = graphicsDevice.getFullScreenWindow();
 		
 		if(w != null){
-			if(w.getBufferStrategy() == null) {
+			if(w.getBufferStrategy() == null){
 				w.setVisible(true);
 				w.createBufferStrategy(2);
 			}
 			BufferStrategy s = w.getBufferStrategy();
-			
 			
 			if(!s.contentsLost()){
 				s.show();

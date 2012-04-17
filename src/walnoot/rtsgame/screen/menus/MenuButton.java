@@ -25,18 +25,22 @@ public class MenuButton {
 	private static BufferedImage buttonImage;
 	private static BufferedImage buttonImageDown;
 	
-	/**@param xOffset hoeveel hij van het midden verwijdert is
-	*@param width Als je -1 of lager invoert neemt hij de breedte van de standaard image
-	*@param height Als je -1 of lager invoert neemt hij de hoogte van de standaard image*/
+	/**
+	 * @param xOffset hoeveel hij van het midden verwijdert is
+	 * @param width Als je -1 of lager invoert neemt hij de breedte van de
+	 * standaard image
+	 * @param height Als je -1 of lager invoert neemt hij de hoogte van de
+	 * standaard image
+	 */
 	public MenuButton(String text, int xOffset, int yPos, int width, int height, MenuScreen s){
-		try {
+		try{
 			if(buttonImage == null){
 				BufferedImage imgSource = ImageIO.read(this.getClass().getResource("/button.png"));
 				
 				buttonImage = imgSource.getSubimage(0, 0, imgSource.getWidth(), imgSource.getHeight() / 2);
 				buttonImageDown = imgSource.getSubimage(0, imgSource.getHeight() / 2, imgSource.getWidth(), imgSource.getHeight() / 2);
 			}
-		} catch (IOException e) {
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 		
@@ -52,7 +56,7 @@ public class MenuButton {
 	
 	public void mouseReleased(MouseEvent e){
 		mouseDown = false;
-		if(isInRect() && !e.isMetaDown())screen.buttonPressed(this);
+		if(isInRect() && !e.isMetaDown()) screen.buttonPressed(this);
 	}
 	
 	public void mousePressed(MouseEvent e){
@@ -83,16 +87,18 @@ public class MenuButton {
 		
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g){
 		selected = isInRect();
 		
 		g.setColor(Color.BLACK);
 		
 		BufferedImage image; //de knop
 		
-		/*if(!mouseDown)g.drawImage(buttonImage, getxPos(), getyPos(), null);
-		else g.drawImage(buttonImageDown, getxPos(), getyPos(), null);*/
-		if(mouseDown)image = buttonImageDown;
+		/*
+		 * if(!mouseDown)g.drawImage(buttonImage, getxPos(), getyPos(), null);
+		 * else g.drawImage(buttonImageDown, getxPos(), getyPos(), null);
+		 */
+		if(mouseDown) image = buttonImageDown;
 		else image = buttonImage;
 		
 		g.drawImage(image, getxPos(), getyPos(), null);
@@ -112,20 +118,20 @@ public class MenuButton {
 		if(selected) g.fillRect(getxPos(), getyPos(), width, height);
 	}
 	
-	public int getxPos() {
+	public int getxPos(){
 		return (((screen.component.getWidth() / RTSComponent.SCALE) / 2) - (width / 2)) + xOffset;
 	}
 	
-	public int getyPos() {
+	public int getyPos(){
 		return yPos;
 	}
 	
-	public int getWidth() {
+	public int getWidth(){
 		return width;
 	}
 	
-	public int getHeight() {
+	public int getHeight(){
 		return height;
 	}
-
+	
 }
