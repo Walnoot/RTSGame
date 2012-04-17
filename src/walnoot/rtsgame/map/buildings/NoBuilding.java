@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import walnoot.rtsgame.map.Map;
-
 public class NoBuilding extends Building {
 	int ID;
 	

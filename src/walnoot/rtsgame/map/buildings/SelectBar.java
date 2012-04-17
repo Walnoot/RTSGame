@@ -1,15 +1,18 @@
 package walnoot.rtsgame.map.buildings;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import walnoot.rtsgame.map.*;
-import walnoot.rtsgame.map.buildings.buttons.*;
-import walnoot.rtsgame.map.entities.TestEntity;
+import walnoot.rtsgame.map.Map;
+import walnoot.rtsgame.map.buildings.buttons.BuildingButtons;
+import walnoot.rtsgame.map.buildings.buttons.HouseButton;
+import walnoot.rtsgame.map.buildings.buttons.LargeHouseButton;
+import walnoot.rtsgame.map.buildings.buttons.RoadButton;
+import walnoot.rtsgame.map.buildings.buttons.TrashButton;
 
 public class SelectBar {
 	Point posBar = new Point(10, 20);

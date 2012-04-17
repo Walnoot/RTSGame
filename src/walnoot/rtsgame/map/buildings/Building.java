@@ -1,8 +1,8 @@
 package walnoot.rtsgame.map.buildings;
 
-import java.awt.*;
-
-import walnoot.rtsgame.map.Map;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
 
 /** een Building is een gebouw ter grootte van 1 tile */
 

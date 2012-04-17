@@ -3,17 +3,11 @@ package walnoot.rtsgame.map.buildings.buttons;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 
 import walnoot.rtsgame.Images;
-import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.buildings.Building;
 import walnoot.rtsgame.map.buildings.HouseBuilding;
-import walnoot.rtsgame.map.buildings.NoBuilding;
-import walnoot.rtsgame.screen.Screen;
 
 public class HouseButton extends BuildingButtons {
 	BufferedImage houseButton;

@@ -1,12 +1,10 @@
 package walnoot.rtsgame.map.buildings.buttons;
 
-import java.awt.*;
-import java.awt.image.*;
-
-import javax.imageio.ImageIO;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import walnoot.rtsgame.RTSComponent;
-import walnoot.rtsgame.map.*;
 
 /**
  * een BuildingButton is een knopje voor op de SelectBar. een BuildingButton

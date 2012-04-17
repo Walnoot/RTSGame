@@ -4,11 +4,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
-
-import walnoot.rtsgame.*;
-import walnoot.rtsgame.map.*;
-import walnoot.rtsgame.map.buildings.*;
+import walnoot.rtsgame.Images;
+import walnoot.rtsgame.map.Map;
 
 public class TrashButton extends BuildingButtons {
 	BufferedImage trashButton;

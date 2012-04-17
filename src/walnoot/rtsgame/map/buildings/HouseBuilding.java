@@ -6,8 +6,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import walnoot.rtsgame.*;
-import walnoot.rtsgame.map.Map;
+import walnoot.rtsgame.Images;
 
 public class HouseBuilding extends Building {
 	BufferedImage house;
