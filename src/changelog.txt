@@ -1,0 +1,10 @@
+changelog:
+23*3*2012
+	toegevoegd aan dropbox 
+24*3*2012
+	map overgezet naar arraylist, map is naar rechts oneindig, maar de linkerkant wordt korter???.
+	michiel: WTF, het werkt ook nog
+25*3*2012
+	map is oneindig, links komt er nu sand1 bij, dit gaat erg traaaaag.
+5*4*2012
+	map weer teruggezet naar een array([][])
