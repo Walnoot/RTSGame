@@ -1,11 +1,6 @@
 package walnoot.rtsgame.map;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Random;
-
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class PerlinNoise2D {
 	private static int seed = new Random().nextInt();
