@@ -10,7 +10,7 @@ import walnoot.rtsgame.map.buildings.Building;
 import walnoot.rtsgame.map.buildings.LargeHouseBuilding;
 import walnoot.rtsgame.map.buildings.NoBuilding;
 
-public class LargeHouseButton extends BuildingButtons {
+public class LargeHouseButton extends BuildingButton {
 	BufferedImage largeHouseButton;
 	private Point placeOnScreen;
 	private int widthButton;

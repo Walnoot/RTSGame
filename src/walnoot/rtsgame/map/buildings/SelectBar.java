@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import walnoot.rtsgame.map.Map;
-import walnoot.rtsgame.map.buildings.buttons.BuildingButtons;
+import walnoot.rtsgame.map.buildings.buttons.BuildingButton;
 import walnoot.rtsgame.map.buildings.buttons.HouseButton;
 import walnoot.rtsgame.map.buildings.buttons.LargeHouseButton;
 import walnoot.rtsgame.map.buildings.buttons.RoadButton;
@@ -19,12 +19,12 @@ public class SelectBar {
 	private int width = 200, height = 20, widthButton = 15, heightButton = 15;
 	BufferedImage bar;
 	Map map;
-	ArrayList<BuildingButtons> buttons = new ArrayList<BuildingButtons>();
+	ArrayList<BuildingButton> buttons = new ArrayList<BuildingButton>();
 	
-	private BuildingButtons house;
-	private BuildingButtons road;
-	private BuildingButtons trash;
-	private BuildingButtons largeHouse;
+	private BuildingButton house;
+	private BuildingButton road;
+	private BuildingButton trash;
+	private BuildingButton largeHouse;
 	
 	private boolean inBar = false;
 	
@@ -51,17 +51,17 @@ public class SelectBar {
 		if(isOnButtons(mousePos) && mouseIsDown){
 			int x = ((mousePos.x / 2 - posBar.x - 20));
 			indexSelected = ((x - (x % widthButton)) / widthButton);
-			for(BuildingButtons b: buttons){
+			for(BuildingButton b: buttons){
 				b.isDeselected();
 			}
 			buttons.get(indexSelected).isSelected();
 			
 		}else if(isInBar(mousePos) && mouseIsDown){
-			for(BuildingButtons b: buttons){
+			for(BuildingButton b: buttons){
 				b.isDeselected();
 			}
 		}
-		for(BuildingButtons b: buttons){
+		for(BuildingButton b: buttons){
 			b.update(mousePos, mouseIsDown, translationX, translationY, isInBar(mousePos));
 		}
 		
@@ -97,7 +97,7 @@ public class SelectBar {
 	
 	public void render(Graphics g){
 		g.drawImage(bar, posBar.x, posBar.y, width, height, null);
-		for(BuildingButtons b: buttons){
+		for(BuildingButton b: buttons){
 			b.render(g);
 		}
 		
