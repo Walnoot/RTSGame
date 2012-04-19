@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import walnoot.rtsgame.Images;
 import walnoot.rtsgame.map.Map;
 
-public class TrashButton extends BuildingButtons {
+public class TrashButton extends BuildingButton {
 	BufferedImage trashButton;
 	private Point placeOnScreen;
 	private int widthButton;

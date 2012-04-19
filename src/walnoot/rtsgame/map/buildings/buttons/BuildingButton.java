@@ -11,7 +11,7 @@ import walnoot.rtsgame.RTSComponent;
  * genereerd de bijbehorende Building bevat: : -HouseButton -LargeHouseButton
  * -RoadButton -TrashButton
  */
-public abstract class BuildingButtons {
+public abstract class BuildingButton {
 	BufferedImage Button;
 	
 	public abstract void render(Graphics g);

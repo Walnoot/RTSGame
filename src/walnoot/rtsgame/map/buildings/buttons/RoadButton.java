@@ -8,7 +8,7 @@ import walnoot.rtsgame.Images;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.buildings.RoadBuilding;
 
-public class RoadButton extends BuildingButtons {
+public class RoadButton extends BuildingButton {
 	
 	BufferedImage roadButton;
 	private Point placeOnScreen;
