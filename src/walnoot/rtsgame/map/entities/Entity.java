@@ -44,11 +44,12 @@ public abstract class Entity {
 		return yPos;
 	}
 	
-	public Point getPointOnScreen(){
-		int x = (xPos - yPos) * (-Tile.WIDTH / 2);
-		int y = (xPos + yPos) * (Tile.HEIGHT / 2);
-		
-		return new Point(x, y);
+	public int getScreenX(){
+		return (xPos - yPos) * (-Tile.WIDTH / 2);
+	}
+	
+	public int getScreenY(){
+		return (xPos + yPos) * (Tile.HEIGHT / 2);
 	}
 	
 	public boolean isSolid(int x, int y){

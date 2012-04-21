@@ -8,8 +8,8 @@ import walnoot.rtsgame.RTSComponent;
 
 /**
  * een BuildingButton is een knopje voor op de SelectBar. een BuildingButton
- * genereerd de bijbehorende Building bevat: : -HouseButton -LargeHouseButton
- * -RoadButton -TrashButton
+ * genereerd de bijbehorende Building bevat: : -{@link HouseButton} -{@link LargeHouseButton}
+ * -{@link RoadButton} -{@link TrashButton}
  */
 public abstract class BuildingButton {
 	BufferedImage Button;

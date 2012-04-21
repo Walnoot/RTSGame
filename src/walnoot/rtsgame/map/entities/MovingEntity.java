@@ -52,18 +52,28 @@ public abstract class MovingEntity extends Entity {
 		return !nextDirections.isEmpty();
 	}
 	
-	public Point getPointOnScreen(){
-		int x = super.getPointOnScreen().x;
-		int y = super.getPointOnScreen().y;
+	public int getScreenX(){
+		int x = super.getScreenX();
 		
 		Direction direction;
 		if(!nextDirections.isEmpty()) direction = nextDirections.get(0);
 		else direction = this.direction;
 		
 		x += Math.round(direction.getPointOnScreen().x * timeTraveled);
+		
+		return x;
+	}
+	
+	public int getScreenY(){
+		int y = super.getScreenY();
+		
+		Direction direction;
+		if(!nextDirections.isEmpty()) direction = nextDirections.get(0);
+		else direction = this.direction;
+		
 		y += Math.round(direction.getPointOnScreen().y * timeTraveled);
 		
-		return new Point(x, y);
+		return y;
 	}
 	
 	/** @return tijd die het duurt om over 1 tile te bewegen */

@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.map.Map;
+import walnoot.rtsgame.map.entities.DeerEntity;
 import walnoot.rtsgame.map.entities.TestEntity;
 import walnoot.rtsgame.map.tribes.Tribe;
 
@@ -28,9 +29,13 @@ public class GameScreen extends Screen {
 		super(component);
 		
 		map = new Map(256);
+		
+		int goodYPos;
+		
 		for(int i = 4;; i++){
 			if(!map.getTile(4, i).isSolid()){
 				player = new TestEntity(map, 4, i, null);
+				goodYPos = i;
 				break;
 			}
 		}
@@ -39,8 +44,10 @@ public class GameScreen extends Screen {
 		tribe = new Tribe("My Tribe", Color.BLUE);
 		player.setTribe(tribe);
 		
-		translationX = -player.getPointOnScreen().x;
-		translationY = -player.getPointOnScreen().y;
+		map.addEntity(new DeerEntity(map, 4, goodYPos)); //voor de test, later weghalen
+		
+		translationX = -player.getScreenX();
+		translationY = -player.getScreenY();
 	}
 	
 	public void render(Graphics g){

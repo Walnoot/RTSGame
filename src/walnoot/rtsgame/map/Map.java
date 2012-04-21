@@ -28,7 +28,9 @@ public class Map {
 		}
 		
 		selectBar.update(mousePos, mouseIsDown, translationX, translationY);
-		for(int x = 1; x < getWidth() - 1; x++){
+		
+		
+		for(int x = 1; x < getWidth() - 1; x++){ //je faalt in loops maken, je slaat de randen over
 			for(int y = 1; y < getWidth() - 1; y++){
 				if(getBuilding(x, y) != null){
 					buildings[x][y].update(mousePos, mouseIsDown);
@@ -89,11 +91,12 @@ public class Map {
 	}
 	
 	public boolean isSolid(int x, int y){
-		if(x < 0 || y < 0 || x >= surface.length || y >= surface.length) return true;
+		if(x < 0 || y < 0 || x >= surface.length || y >= surface.length) return true; //buiten de map
 		if(surface[x][y].isSolid()) return true;
 		
-		Entity e = getEntity(x, y);
-		if(e != null && e.isSolid(x, y)) return true;
+		for(Entity e: entities){
+			if(e.isSolid(x, y)) return true;
+		}
 		
 		return false;
 	}
