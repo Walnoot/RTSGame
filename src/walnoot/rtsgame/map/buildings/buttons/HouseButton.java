@@ -39,7 +39,7 @@ public class HouseButton extends BuildingButton {
 	public void update(Point mousePos, boolean mouseIsDown, int translationX, int translationY, boolean isInBar){
 		if(isSelected && mouseIsDown){
 			if(!isInBar){
-				map.addBuilding(house, screenToMap(translationX, translationY, mousePos).x, screenToMap(translationX, translationY, mousePos).y);
+				addBuilding(map, house, screenToMap(translationX, translationY, mousePos).x, screenToMap(translationX, translationY, mousePos).y, house.getWidth(), house.getHeight());
 			}
 		}
 	}
