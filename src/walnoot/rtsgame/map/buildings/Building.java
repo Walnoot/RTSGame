@@ -11,6 +11,10 @@ public abstract class Building {
 	
 	public abstract int getID();
 	
+	public abstract boolean isLarge();
+	public abstract int getWidth();
+	public abstract int getHeight();
+	
 	public abstract void update(Point posMouse, boolean mouseIsDown);
 	
 }

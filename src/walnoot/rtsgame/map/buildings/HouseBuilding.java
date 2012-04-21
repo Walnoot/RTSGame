@@ -45,5 +45,17 @@ public class HouseBuilding extends Building {
 	public int getID(){
 		return 2;
 	}
+
+	public boolean isLarge() {
+		return false;
+	}
+
+	public int getWidth() {
+		return 1;
+	}
+
+	public int getHeight() {
+		return 1;
+	}
 	
 }

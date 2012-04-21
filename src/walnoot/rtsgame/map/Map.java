@@ -108,10 +108,53 @@ public class Map {
 		return null;
 	}
 	
-	public void deleteBuilding(int x, int y){
-		if(x > 0 && x < getHeigth() && y > 0 && y < getWidth()){
-			buildings[x][y] = null;
+	public void deleteBuilding(int xPos, int yPos){
+		int width, height;
+		boolean largeBuilding = false;
+		if(isOnMap(xPos,yPos)&& buildings[xPos][yPos]!=null){
+			int ID = buildings[xPos][yPos].getID();
+			for(;;){
+				if(ID >= 10 && ID <= 24)largeBuilding = true;
+				if(buildings[xPos-1][yPos]!=null && buildings[xPos-1][yPos].getID() == ID + 4){								// zoekt hoe groot het gebouw is. Zie ID's grote gebouwen.png	
+					ID+=4;																									// zet de x- en ycoordinaten zo ver mogelijk van het gebouw af.
+					xPos-=1;
+				}else if(buildings[xPos][yPos-1]!=null && buildings[xPos][yPos-1].getID() == ID + 1){
+					ID+=1;
+					yPos-=1;
+				}else{
+					if(largeBuilding){
+						width = (int) (buildings[xPos][yPos].getID() - 8 ) % 4;
+						System.out.println("width: " + width);
+						height = (int) (buildings[xPos][yPos].getID()-8 - width )/3 + 1;
+						System.out.println("height: " + height);
+					}else{
+						
+						if(buildings[xPos][yPos].isLarge()){
+							width = buildings[xPos][yPos].getWidth();
+							height = buildings[xPos][yPos].getHeight();
+							xPos-=width-1;
+							yPos-=height-1;
+						}else{
+							width = 1;
+							height = 1;
+						}
+					}
+					break;
+				}
+			}
+			for(int x = 0; x < height; x++){
+				for(int y = 0; y < width; y++){
+					buildings[xPos + x][yPos + y]=null;
+				}
+			}
 		}
+	}
+	
+	public boolean isOnMap(int x, int y){
+		if(x <= getHeigth() && x >= 0 && y >= 0 && y < getWidth()){
+			return true;
+		}
+		return false;
 	}
 	
 	public void addBuilding(Building b, int x, int y){

@@ -40,6 +40,18 @@ public class LargeHouseBuilding extends Building {
 		return ID;
 	}
 	
+	public boolean isLarge(){
+		return true;
+	}
+	
+	public int getWidth(){
+		return 2;
+	}
+	
+	public int getHeight(){
+		return 2;
+	}
+	
 	public void update(Point posMouse, boolean mouseIsDown){
 		
 	}

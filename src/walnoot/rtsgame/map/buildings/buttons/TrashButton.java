@@ -38,34 +38,6 @@ public class TrashButton extends BuildingButton {
 			if(!isOnBar){
 				int xPos = screenToMap(translationX, translationY, mousePos).x;
 				int yPos = screenToMap(translationX, translationY, mousePos).y;
-				int ID = 0;
-				if(map.getBuilding(xPos, yPos) != null){
-					ID = map.getBuilding(xPos, yPos).getID();
-				}
-				if(ID >= 3 && ID <= 6){ //het is onderdeel van een LargeHouse.
-					switch (ID) { // kijken welk onderdeel van het largehouse het is.
-					case 3:
-						map.deleteBuilding(xPos - 1, yPos);
-						map.deleteBuilding(xPos, yPos - 1);
-						map.deleteBuilding(xPos - 1, yPos - 1);
-						break;
-					case 4:
-						map.deleteBuilding(xPos + 1, yPos);
-						map.deleteBuilding(xPos, yPos + 1);
-						map.deleteBuilding(xPos + 1, yPos + 1);
-						break;
-					case 6:
-						map.deleteBuilding(xPos - 1, yPos);
-						map.deleteBuilding(xPos, yPos + 1);
-						map.deleteBuilding(xPos - 1, yPos + 1);
-						break;
-					case 5:
-						map.deleteBuilding(xPos + 1, yPos);
-						map.deleteBuilding(xPos, yPos - 1);
-						map.deleteBuilding(xPos + 1, yPos - 1);
-						break;
-					}
-				}
 				map.deleteBuilding(xPos, yPos);
 			}
 		}

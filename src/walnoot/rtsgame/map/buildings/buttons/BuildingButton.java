@@ -5,6 +5,8 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import walnoot.rtsgame.RTSComponent;
+import walnoot.rtsgame.map.Map;
+import walnoot.rtsgame.map.buildings.Building;
 
 /**
  * een BuildingButton is een knopje voor op de SelectBar. een BuildingButton
@@ -30,6 +32,10 @@ public abstract class BuildingButton {
 		int y = (int) ((mouseY / 16.0) + (mouseX / 32.0));
 		return new Point(x, y);
 		
+	}
+	
+	public void addBuilding(Map map, Building b, int xPos, int yPos , int length, int width){
+		map.addBuilding(b, xPos, yPos);
 	}
 	
 }

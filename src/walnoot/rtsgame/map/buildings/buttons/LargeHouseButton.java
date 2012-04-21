@@ -44,10 +44,9 @@ public class LargeHouseButton extends BuildingButton {
 			if(!isInBar){
 				if(map.getBuilding(xPos, yPos) == null && map.getBuilding(xPos - 1, yPos) == null && map.getBuilding(xPos, yPos - 1) == null && map.getBuilding(xPos - 1, yPos - 1) == null){
 					map.addBuilding(largeHouse, xPos, yPos);
-					map.addBuilding(new NoBuilding(5), xPos - 1, yPos);
-					map.addBuilding(new NoBuilding(6), xPos, yPos - 1);
-					map.addBuilding(new NoBuilding(4), xPos - 1, yPos - 1);
-				}else{
+					map.addBuilding(new NoBuilding(13), xPos - 1, yPos);
+					map.addBuilding(new NoBuilding(10), xPos, yPos - 1);
+					map.addBuilding(new NoBuilding(14), xPos - 1, yPos - 1);
 				}
 			}
 		}
