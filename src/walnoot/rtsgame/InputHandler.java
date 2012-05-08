@@ -30,6 +30,10 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 	private int mouseX, mouseY, mouseWheelChange;
 	private char charTyped;
 	
+	private InputHandler(){
+		//Only InputHandler can initialize an InputHandler object
+	}
+	
 	public void update(){
 		LMBWasDown = LMBDown;
 		RMBWasDown = RMBDown;

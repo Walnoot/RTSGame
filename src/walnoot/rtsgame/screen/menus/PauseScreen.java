@@ -2,6 +2,7 @@ package walnoot.rtsgame.screen.menus;
 
 import java.awt.Graphics;
 
+import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.screen.Screen;
 
@@ -10,8 +11,8 @@ public class PauseScreen extends MenuScreen {
 	
 	private MenuButton resumeGame = new MenuButton("Resume Game", 0, 20, -1, -1, this);
 	
-	public PauseScreen(RTSComponent component, Screen overlappedScreen){
-		super(component);
+	public PauseScreen(RTSComponent component, Screen overlappedScreen, InputHandler input){
+		super(component, input);
 		this.overlappedScreen = overlappedScreen;
 	}
 	

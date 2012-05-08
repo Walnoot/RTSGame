@@ -1,9 +1,14 @@
 package walnoot.rtsgame.map.buildings;
 
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+
+import walnoot.rtsgame.map.Map;
 
 public class LargeHouseBuilding extends Building {
 	BufferedImage largeHouse;
@@ -36,14 +41,6 @@ public class LargeHouseBuilding extends Building {
 		return new Point(x, y);
 	}
 	
-	public int getID(){
-		return ID;
-	}
-	
-	public boolean isLarge(){
-		return true;
-	}
-	
 	public int getWidth(){
 		return 2;
 	}
@@ -52,8 +49,11 @@ public class LargeHouseBuilding extends Building {
 		return 2;
 	}
 	
-	public void update(Point posMouse, boolean mouseIsDown){
+	public void update(Map map){
 		
 	}
 	
+	public String getName(){
+		return "Large House";
+	}
 }

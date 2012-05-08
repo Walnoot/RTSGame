@@ -3,8 +3,8 @@ package walnoot.rtsgame.map.entities;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.Map;
-import walnoot.rtsgame.map.tribes.NameGenerator;
 import walnoot.rtsgame.map.tribes.Tribe;
 import walnoot.rtsgame.screen.Screen;
 
@@ -14,7 +14,7 @@ public class TestEntity extends MovingEntity {
 	public TestEntity(Map map, int xPos, int yPos, Tribe tribe){
 		super(map, xPos, yPos, tribe);
 		
-		name = new NameGenerator().getRandomName();
+		name = Util.NAME_GEN.getRandomName();
 		
 		//moveRandomLocation();
 	}

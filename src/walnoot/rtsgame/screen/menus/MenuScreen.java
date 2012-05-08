@@ -3,14 +3,15 @@ package walnoot.rtsgame.screen.menus;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
+import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.screen.Screen;
 
 public abstract class MenuScreen extends Screen {
 	protected int selectedButton = 0;
 	
-	public MenuScreen(RTSComponent component){
-		super(component);
+	public MenuScreen(RTSComponent component, InputHandler input){
+		super(component, input);
 	}
 	
 	public void render(Graphics g){

@@ -6,11 +6,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,26 +15,28 @@ import javax.swing.JFrame;
 import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
 
-public class RTSComponent extends Canvas implements Runnable, KeyListener, MouseListener, MouseMotionListener {
-	private static final long serialVersionUID = 1L;
+public class RTSComponent extends Canvas implements Runnable {
+	private static final long serialVersionUID = -1401470770875975471L;
+
 	public static final double MS_PER_TICK = 1000.0 / 60.0;
 	
 	private Screen screen;
 	private boolean running = true;
 	public static final int SCALE = 2;
 	private FullScreenManager fullScreenManager;
+	private InputHandler input;
 	private Container container;
 	private long fps;
 	private BufferedImage screenImage;
 	
 	public RTSComponent(Container container){
 		this.container = container;
-		screen = new GameScreen(this);
-		//screen = new TitleScreen(this);
 		fullScreenManager = new FullScreenManager(this, container);
-		addKeyListener(this);
-		addMouseListener(this);
-		addMouseMotionListener(this);
+		
+		input = InputHandler.getInputHandler(this);
+		
+		screen = new GameScreen(this, input);
+		
 		setIgnoreRepaint(true);
 		
 		if(!new File(Options.fileName).exists()) Options.writeOptions();
@@ -50,11 +47,15 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 		if(screenImage.getWidth() != getWidth() / SCALE) screenImage = new BufferedImage(getWidth() / SCALE, getHeight() / SCALE, BufferedImage.TYPE_INT_RGB);
 		if(screenImage.getHeight() != getHeight() / SCALE) screenImage = new BufferedImage(getWidth() / SCALE, getHeight() / SCALE, BufferedImage.TYPE_INT_RGB);
 		
+		//long then = System.nanoTime();
+		
 		Graphics2D g = (Graphics2D) screenImage.getGraphics();
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, screen.getWidth(), screen.getHeight());
 		screen.render(g);
+		
+		//System.out.println((System.nanoTime() - then) / 1000.0);
 		
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null){
@@ -95,6 +96,9 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 				numTicks++;
 				
 				screen.update();
+				input.update();
+				
+				if(input.escape.isPressed()) stop();
 			}
 			
 			if(isShowing() && shouldRender){
@@ -136,48 +140,6 @@ public class RTSComponent extends Canvas implements Runnable, KeyListener, Mouse
 		Options.startFullScreen = fullScreenManager.isFullScreen();
 		
 		Options.writeOptions();
-	}
-	
-	public void mouseDragged(MouseEvent e){
-		if(screen != null) screen.mouseDragged(e);
-	}
-	
-	public void mouseMoved(MouseEvent e){
-		if(screen != null) screen.mouseMoved(e);
-	}
-	
-	public void mouseClicked(MouseEvent e){
-		if(screen != null) screen.mouseClicked(e);
-	}
-	
-	public void mouseEntered(MouseEvent e){
-		if(screen != null) screen.mouseEntered(e);
-	}
-	
-	public void mouseExited(MouseEvent e){
-		if(screen != null) screen.mouseExited(e);
-	}
-	
-	public void mousePressed(MouseEvent e){
-		if(screen != null) screen.mousePressed(e);
-	}
-	
-	public void mouseReleased(MouseEvent e){
-		if(screen != null) screen.mouseReleased(e);
-	}
-	
-	public void keyPressed(KeyEvent e){
-		if(screen != null) screen.keyPressed(e);
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) stop();
-		if(e.getKeyCode() == KeyEvent.VK_F11) fullScreenManager.switchFullScreen();
-	}
-	
-	public void keyReleased(KeyEvent e){
-		if(screen != null) screen.keyReleased(e);
-	}
-	
-	public void keyTyped(KeyEvent e){
-		if(screen != null) screen.keyTyped(e);
 	}
 	
 	public static void main(String[] args){

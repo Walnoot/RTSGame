@@ -3,39 +3,41 @@ package walnoot.rtsgame.map;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-import walnoot.rtsgame.map.buildings.*;
-import walnoot.rtsgame.map.entities.*;
-import walnoot.rtsgame.map.tiles.*;
+import walnoot.rtsgame.map.entities.Entity;
+import walnoot.rtsgame.map.structures.Structure;
+import walnoot.rtsgame.map.tiles.Tile;
 
 public class Map {
 	private Tile[][] surface;
-	private Set<Entity> entities = new LinkedHashSet<Entity>();
-	public Building[][] buildings;
-	public SelectBar selectBar = new SelectBar(this);
+	private List<Entity> entities = new ArrayList<Entity>();
+	
+	private static final Comparator<Entity> spriteSorter = new Comparator<Entity>() {
+		public int compare(Entity e0, Entity e1){
+			int y0 = e0.getxPos() + e0.getyPos(); //aprox. screen y coordinate of e0
+			int y1 = e1.getxPos() + e1.getyPos(); //aprox. screen y coordinate of e1
+			
+			if(y1 < y0)
+				return +1;
+			if(y1 > y0)
+				return -1;
+			return 0;
+		}
+		
+	};
 	
 	public Map(int mapSize){
 		surface = new Tile[mapSize][mapSize];
-		buildings = new Building[mapSize][mapSize];
 		generateMap();
 	}
 	
-	public void update(Point mousePos, boolean mouseIsDown, int translationX, int translationY){
+	public void update(int translationX, int translationY){
 		for(Entity e: entities){
 			e.update();
-		}
-		
-		selectBar.update(mousePos, mouseIsDown, translationX, translationY);
-		
-		
-		for(int x = 1; x < getWidth() - 1; x++){ //je faalt in loops maken, je slaat de randen over
-			for(int y = 1; y < getWidth() - 1; y++){
-				if(getBuilding(x, y) != null){
-					buildings[x][y].update(mousePos, mouseIsDown);
-				}
-			}
 		}
 	}
 	
@@ -52,11 +54,6 @@ public class Map {
 				else surface[x][y] = Tile.water1;
 			}
 		}
-		for(int x = 0; x < getWidth(); x++){
-			for(int y = 0; y < getWidth(); y++){
-				buildings[x][y] = null;
-			}
-		}
 		
 		//System.out.println(System.currentTimeMillis() - then);
 	}
@@ -65,25 +62,18 @@ public class Map {
 		g.translate(translation.x, translation.y);
 		
 		for(int x = 0; x < getWidth(); x++){
-			for(int y = 0; y < getHeigth(); y++){
+			for(int y = 0; y < getLength(); y++){
 				getTile(x, y).render(g, screenSize, translation, new Point(x, y));
 			}
 		}
-		for(int x = 0; x < getWidth(); x++){
-			for(int y = 0; y < getHeigth(); y++){
-				if(getBuilding(x, y) != null){
-					getBuilding(x, y).render(g, screenSize, translation, new Point(x, y));
-				}
-				
-			}
-		}
+		
+		Collections.sort(entities, spriteSorter);
 		
 		for(Entity e: entities){
 			e.render(g);
 		}
 		
 		g.translate(-translation.x, -translation.y);
-		selectBar.render(g);
 	}
 	
 	public boolean isSolid(Point pos){
@@ -103,66 +93,27 @@ public class Map {
 	
 	public Entity getEntity(int x, int y){
 		for(Entity e: entities){
-			if(e.getxPos() == x && e.getyPos() == y) return e;
+			if(e instanceof Structure){
+				Structure structure = (Structure) e;
+				
+				int dx = x - structure.getxPos();
+				int dy = y - structure.getyPos();
+				
+				if(dx >= 0 && dy >= 0){
+					if(dx < structure.getSize() && dy < structure.getSize()) return structure;
+				}
+			}else{
+				if(e.getxPos() == x && e.getyPos() == y) return e;
+			}
 		}
 		return null;
 	}
 	
-	public void deleteBuilding(int xPos, int yPos){
-		int width, height;
-		boolean largeBuilding = false;
-		if(isOnMap(xPos,yPos)&& buildings[xPos][yPos]!=null){
-			int ID = buildings[xPos][yPos].getID();
-			for(;;){
-				if(ID >= 10 && ID <= 24)largeBuilding = true;
-				if(buildings[xPos-1][yPos]!=null && buildings[xPos-1][yPos].getID() == ID + 4){								// zoekt hoe groot het gebouw is. Zie ID's grote gebouwen.png	
-					ID+=4;																									// zet de x- en ycoordinaten zo ver mogelijk van het gebouw af.
-					xPos-=1;
-				}else if(buildings[xPos][yPos-1]!=null && buildings[xPos][yPos-1].getID() == ID + 1){
-					ID+=1;
-					yPos-=1;
-				}else{
-					if(largeBuilding){
-						width = (int) (buildings[xPos][yPos].getID() - 8 ) % 4;
-						System.out.println("width: " + width);
-						height = (int) (buildings[xPos][yPos].getID()-8 - width )/3 + 1;
-						System.out.println("height: " + height);
-					}else{
-						
-						if(buildings[xPos][yPos].isLarge()){
-							width = buildings[xPos][yPos].getWidth();
-							height = buildings[xPos][yPos].getHeight();
-							xPos-=width-1;
-							yPos-=height-1;
-						}else{
-							width = 1;
-							height = 1;
-						}
-					}
-					break;
-				}
-			}
-			for(int x = 0; x < height; x++){
-				for(int y = 0; y < width; y++){
-					buildings[xPos + x][yPos + y]=null;
-				}
-			}
-		}
-	}
-	
 	public boolean isOnMap(int x, int y){
-		if(x <= getHeigth() && x >= 0 && y >= 0 && y < getWidth()){
+		if(x <= getLength() && x >= 0 && y >= 0 && y < getWidth()){
 			return true;
 		}
 		return false;
-	}
-	
-	public void addBuilding(Building b, int x, int y){
-		if(x > 0 && x < getHeigth() && y > 0 && y < getWidth()){
-			if(!surface[x][y].isSolid() && buildings[x][y] == null){
-				buildings[x][y] = b;
-			}
-		}
 	}
 	
 	public Tile getTile(int x, int y){
@@ -173,19 +124,11 @@ public class Map {
 		}
 	}
 	
-	public Building getBuilding(int x, int y){
-		try{
-			return (buildings[x][y]);
-		}catch(Exception e){
-			return null;
-		}
-	}
-	
 	public int getWidth(){
 		return surface.length;
 	}
 	
-	public int getHeigth(){
+	public int getLength(){
 		return surface[0].length;
 	}
 	

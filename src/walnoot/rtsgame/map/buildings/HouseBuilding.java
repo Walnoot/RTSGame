@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import walnoot.rtsgame.Images;
+import walnoot.rtsgame.map.Map;
 
 public class HouseBuilding extends Building {
 	BufferedImage house;
@@ -38,18 +39,10 @@ public class HouseBuilding extends Building {
 		return new Point(x, y);
 	}
 	
-	public void update(Point posMouse, boolean mouseIsDown){
+	public void update(Map map){
 		
 	}
 	
-	public int getID(){
-		return 2;
-	}
-
-	public boolean isLarge() {
-		return false;
-	}
-
 	public int getWidth() {
 		return 1;
 	}
@@ -58,4 +51,7 @@ public class HouseBuilding extends Building {
 		return 1;
 	}
 	
+	public String getName(){
+		return "House";
+	}
 }

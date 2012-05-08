@@ -1,7 +1,6 @@
 package walnoot.rtsgame.map.entities;
 
 import java.awt.Graphics;
-import java.awt.Point;
 
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tiles.Tile;
@@ -18,6 +17,8 @@ public abstract class Entity {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.tribe = tribe;
+		
+		health = getMaxHealth();
 	}
 	
 	public abstract void update();

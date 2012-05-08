@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.screen.menus.MainMenu;
 
@@ -19,8 +20,8 @@ public class TitleScreen extends Screen {
 	private float logoTransparancy = 0.2f; //hoe transparant het logo is, max. 1.0
 	private boolean[][] tiles = new boolean[20][20];
 	
-	public TitleScreen(RTSComponent game){
-		super(game);
+	public TitleScreen(RTSComponent game, InputHandler input){
+		super(game, input);
 		try{
 			grass = ImageIO.read(this.getClass().getResource("/grass.png"));
 			grass2 = ImageIO.read(this.getClass().getResource("/grass2.png"));
@@ -61,7 +62,7 @@ public class TitleScreen extends Screen {
 	
 	public void update(){
 		totalTime++;
-		if(totalTime > 200 && !(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this));
+		if(totalTime > 200 && !(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this, input));
 		
 		boolean switchScreen = false;
 		
@@ -73,7 +74,7 @@ public class TitleScreen extends Screen {
 		}
 		
 		if(switchScreen){
-			if(!(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this));
+			if(!(component.getScreen() instanceof MainMenu)) setScreen(new MainMenu(component, this, input));
 		}
 	}
 }

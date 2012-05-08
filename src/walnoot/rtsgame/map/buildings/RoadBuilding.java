@@ -11,14 +11,10 @@ import walnoot.rtsgame.map.Map;
 
 public class RoadBuilding extends Building {
 	BufferedImage road;
-	Map map;
 	int xPos, yPos;
 	
-	public RoadBuilding(int xPos, int yPos, Map map){
+	public RoadBuilding(){
 		road = getImage(4, 0);
-		this.map = map;
-		this.xPos = xPos;
-		this.yPos = yPos;
 	}
 	
 	public BufferedImage getImage(int x, int y){
@@ -44,8 +40,8 @@ public class RoadBuilding extends Building {
 		return new Point(x, y);
 	}
 	
-	public void update(Point posMouse, boolean mouseIsDown){
-		int roadVersion = 1;
+	public void update(Map map){
+		/*int roadVersion = 1;
 		int idNE;
 		if(map.buildings[xPos - 1][yPos] != null) idNE = map.buildings[xPos - 1][yPos].getID();
 		else idNE = 0;
@@ -80,9 +76,7 @@ public class RoadBuilding extends Building {
 		else SWIsRoad = false;
 		if(idSE == 1) SEIsRoad = true;
 		else SEIsRoad = false;
-		/*
-		 * kijkt welke soort weg ie moet renderen.
-		 */
+		//kijkt welke soort weg ie moet renderen.
 		if(NEIsRoad || houseAv || idNE == 3){
 			if(NWIsRoad){
 				if(SWIsRoad){
@@ -144,17 +138,9 @@ public class RoadBuilding extends Building {
 				}
 			}
 		}
-		road = Images.terrain[4][roadVersion - 1];
+		road = Images.terrain[4][roadVersion - 1];*/
 	}
 	
-	public int getID(){
-		return 1;
-	}
-	
-	public boolean isLarge() {
-		return false;
-	}
-
 	public int getWidth() {
 		return 1;
 	}
@@ -163,4 +149,7 @@ public class RoadBuilding extends Building {
 		return 1;
 	}
 	
+	public String getName(){
+		return "Road";
+	}
 }

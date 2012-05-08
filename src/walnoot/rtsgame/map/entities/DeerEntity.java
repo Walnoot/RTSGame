@@ -1,5 +1,6 @@
 package walnoot.rtsgame.map.entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -32,7 +33,8 @@ public class DeerEntity extends MovingEntity {
 	}
 	
 	public void render(Graphics g){
-		Screen.font.drawLine(g, "Deer", getScreenX(), getScreenY());
+		g.setColor(Color.BLACK);
+		Screen.font.drawLine(g, getName(), getScreenX(), getScreenY());
 	}
 	
 	public int getMaxHealth(){

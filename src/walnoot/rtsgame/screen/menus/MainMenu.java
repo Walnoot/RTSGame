@@ -2,6 +2,7 @@ package walnoot.rtsgame.screen.menus;
 
 import java.awt.Graphics;
 
+import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.RTSComponent;
 import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
@@ -14,8 +15,8 @@ public class MainMenu extends MenuScreen {
 	private MenuButton startGame = new MenuButton("Start Game", 0, 100, -1, -1, this);
 	private MenuButton exitGame = new MenuButton("Exit Game", 0, 130, -1, -1, this);
 	
-	public MainMenu(RTSComponent component, TitleScreen title){
-		super(component);
+	public MainMenu(RTSComponent component, TitleScreen title, InputHandler input){
+		super(component, input);
 		this.title = title;
 	}
 	
@@ -46,7 +47,7 @@ public class MainMenu extends MenuScreen {
 	}
 	
 	public void buttonPressed(MenuButton menuButton){
-		if(menuButton.equals(startGame)) super.component.setScreen(new GameScreen(component));
+		if(menuButton.equals(startGame)) super.component.setScreen(new GameScreen(component, input));
 		else if(menuButton.equals(exitGame)) component.stop();
 	}
 }
