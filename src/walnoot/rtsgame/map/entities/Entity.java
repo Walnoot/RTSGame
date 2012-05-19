@@ -2,9 +2,11 @@ package walnoot.rtsgame.map.entities;
 
 import java.awt.Graphics;
 
+import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tiles.Tile;
 import walnoot.rtsgame.map.tribes.Tribe;
+import walnoot.rtsgame.screen.GameScreen;
 
 public abstract class Entity {
 	protected final Map map;
@@ -28,6 +30,9 @@ public abstract class Entity {
 	public abstract int getMaxHealth();
 	
 	public abstract String getName();
+	
+	public void onRightClick(GameScreen screen, InputHandler input){
+	}
 	
 	public int getHealth(){
 		return health;

@@ -1,6 +1,7 @@
 package walnoot.rtsgame.screen;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -14,10 +15,12 @@ import walnoot.rtsgame.map.entities.MovingEntity;
 import walnoot.rtsgame.map.entities.TestEntity;
 import walnoot.rtsgame.map.structures.TentStructure;
 import walnoot.rtsgame.map.tribes.Tribe;
+import walnoot.rtsgame.popups.Popup;
 
 public class GameScreen extends Screen {
 	private Map map;
 	private int translationX, translationY;
+	private Popup popup = null;
 	
 	private Entity selectedEntity;
 	
@@ -50,10 +53,16 @@ public class GameScreen extends Screen {
 	}
 	
 	public void render(Graphics g){
-		map.render(g, new Point((int) translationX, (int) translationY), super.getScreenSize());
+		Point translation = new Point((int) translationX, (int) translationY);
 		
-		int x = Util.getMapX(input.getMouseX() - translationX, input.getMouseY() - translationY);
-		int y = Util.getMapY(input.getMouseX() - translationX, input.getMouseY() - translationY);
+		map.render(g, translation, new Dimension(getWidth(), getHeight()));
+		
+		g.translate(translation.x, translation.y);
+		if(popup != null) popup.render(g);
+		g.translate(-translation.x, -translation.y);
+		
+		int x = getMapX();
+		int y = getMapY();
 		
 		g.setColor(Color.WHITE);
 		font.drawBoldLine(g, x + ":" + y, 20, 20, Color.BLACK);
@@ -65,7 +74,7 @@ public class GameScreen extends Screen {
 	}
 	
 	public void update(){
-		map.update((int) translationX, (int) translationY);
+		map.update((int) Math.floor(translationX), (int) Math.floor(translationY));
 		
 		if(input.up.isPressed()) translationY += 5;
 		if(input.down.isPressed()) translationY -= 5;
@@ -76,11 +85,27 @@ public class GameScreen extends Screen {
 			selectedEntity = map.getEntity(getMapX(), getMapY());
 		}
 		
-		if(selectedEntity instanceof MovingEntity){
-			if(input.RMBTapped()){
+		if(popup != null){
+			popup.update();
+			if(popup.getOwner() != selectedEntity) popup = null;
+		}
+		if(input.RMBTapped()){
+			if(selectedEntity == null) return;
+			
+			if(getMapX() == selectedEntity.getxPos() && getMapY() == selectedEntity.getyPos()){
+				selectedEntity.onRightClick(this, input);
+			}else if(selectedEntity instanceof MovingEntity){
 				((MovingEntity) selectedEntity).moveTo(new Point(getMapX(), getMapY()));
 			}
 		}
+	}
+	
+	public void setPopup(Popup popup){
+		this.popup = popup;
+	}
+
+	public void removePopup(){
+		popup = null;
 	}
 	
 	private int getMapX(){

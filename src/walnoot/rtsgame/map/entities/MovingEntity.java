@@ -32,7 +32,10 @@ public abstract class MovingEntity extends Entity {
 		while(timeTraveled > 1){
 			timeTraveled -= 1;
 			
-			if(nextDirections.size() == 1) timeTraveled = 0;
+			if(nextDirections.size() == 1){
+				timeTraveled = 0;
+				onStopMoving();
+			}
 			
 			direction = nextDirection;
 			
@@ -43,6 +46,9 @@ public abstract class MovingEntity extends Entity {
 		}
 	}
 	
+	protected void onStopMoving(){
+	}
+
 	public void moveTo(Point goal){
 		LinkedList<Direction> path = Pathfinder.moveTo(new Point(xPos, yPos), goal, map);
 		if(path != null) nextDirections = path;
