@@ -1,4 +1,4 @@
-package walnoot.rtsgame.map.tribes;
+package walnoot.rtsgame;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,7 +15,7 @@ public class NameGenerator {
 		random = new Random();
 		
 		try{
-			scanner = new Scanner(this.getClass().getResourceAsStream("/vowels.txt"));
+			scanner = new Scanner(this.getClass().getResourceAsStream("/res/vowels.txt"));
 		}catch(Exception e){
 			e.printStackTrace();
 			return;

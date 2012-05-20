@@ -8,3 +8,6 @@ changelog:
 	map is oneindig, links komt er nu sand1 bij, dit gaat erg traaaaag.
 5*4*2012
 	map weer teruggezet naar een array([][])
+16*5*2012
+	weer begonnen met changelog bijhouden
+	begonnen met itemEntities;

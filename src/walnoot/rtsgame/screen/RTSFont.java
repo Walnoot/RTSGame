@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class RTSFont {
+	public static final int HEIGHT = 9;
 	private final Char[] chars = new Char[256];
 	
 	public RTSFont(BufferedImage sourceImage){

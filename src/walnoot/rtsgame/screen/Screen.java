@@ -2,7 +2,6 @@ package walnoot.rtsgame.screen;
 
 import java.awt.AlphaComposite;
 import java.awt.Composite;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -17,15 +16,12 @@ import walnoot.rtsgame.RTSComponent;
  */
 public abstract class Screen {
 	public RTSComponent component;
-	public static RTSFont font;
+	public static RTSFont font = new RTSFont(Images.font);
 	protected InputHandler input;
 	
 	public Screen(RTSComponent component, InputHandler input){
 		this.component = component;
 		this.input = input;
-		
-		if(font != null) return;
-		font = new RTSFont(Images.load("/font.png"));
 	}
 	
 	public void setScreen(Screen screen){
@@ -53,14 +49,6 @@ public abstract class Screen {
 	
 	public Point getMouseLocation(){
 		return new Point(input.getMouseX(), input.getMouseY());
-	}
-	
-	/** returns the size off the surface being rendered */
-	public Dimension getScreenSize(){
-		int x = component.getWidth() / RTSComponent.SCALE;
-		int y = component.getHeight() / RTSComponent.SCALE;
-		
-		return new Dimension(x, y);
 	}
 	
 	public int getWidth(){

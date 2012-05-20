@@ -47,10 +47,9 @@ public class Pathfinder {
 		
 		Node node = finalNode;
 		while(true){
-			try{
-				result.addFirst(node.getDirection());
-			}catch(NullPointerException e){
-			}
+			Direction dir = node.getDirection();
+			if(dir != null)
+				result.addFirst(dir);
 			
 			if(node.parent != null){
 				node = node.parent;
@@ -103,15 +102,15 @@ public class Pathfinder {
 		
 		public void calculateG(){
 			int parentG = 0;
-			try{
+			if(parent != null){
 				parentG += parent.g;
 				parentG += (getDirection().isDiagonal() ? 14 : 10);
-			}catch(NullPointerException e){
 			}
 			g = parentG;
 		}
 		
 		public Direction getDirection(){
+			if(parent == null) return null;
 			return Direction.getDirection(posX - parent.posX, posY - parent.posY);
 		}
 		
