@@ -17,20 +17,20 @@ public class DeerEntity extends MovingEntity {
 	
 	public void update(){
 		super.update();
-		
 		if(!isMoving() && Util.RANDOM.nextInt(1000) < WALK_CHANGE) moveRandomLocation();
 	}
 	
 	public void moveRandomLocation(){
 		int x, y;
-		
 		do{
 			x = xPos + Util.RANDOM.nextInt(WALK_RANGE * 2) - WALK_RANGE;
 			y = yPos + Util.RANDOM.nextInt(WALK_RANGE * 2) - WALK_RANGE;
 		}while(map.isSolid(x, y));
-		
+	
 		moveTo(new Point(x, y));
 	}
+	
+	
 	
 	public void render(Graphics g){
 		g.setColor(Color.BLACK);

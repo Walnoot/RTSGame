@@ -43,7 +43,7 @@ public class GameScreen extends Screen {
 		selectedEntity.setTribe(tribe);
 		
 		map.addEntity(new DeerEntity(map, 4, goodYPos)); //voor de test, later weghalen
-		map.addEntity(new TentStructure(map, 4, goodYPos + 1, tribe)); //voor de test, later weghalen
+		map.addEntity(new TentStructure(map, 4, goodYPos + 10, tribe)); //voor de test, later weghalen
 		
 		translationX = -selectedEntity.getScreenX();
 		translationY = -selectedEntity.getScreenY();
