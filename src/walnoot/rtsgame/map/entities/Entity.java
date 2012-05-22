@@ -11,7 +11,9 @@ import walnoot.rtsgame.screen.GameScreen;
 public abstract class Entity {
 	protected final Map map;
 	private boolean removed;
-	protected int xPos, yPos, health;
+	public int xPos;
+	public int yPos;
+	protected int health;
 	private Tribe tribe;
 	
 	public Entity(Map map, int xPos, int yPos, Tribe tribe){

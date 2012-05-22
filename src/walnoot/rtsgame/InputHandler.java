@@ -11,8 +11,9 @@ import java.util.ArrayList;
 
 public class InputHandler implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 	private ArrayList<Key> keylist = new ArrayList<Key>();
-	
+
 	public Key left = new Key(KeyEvent.VK_LEFT, KeyEvent.VK_A);
+	public Key fullScreen = new Key(KeyEvent.VK_F11);
 	public Key right = new Key(KeyEvent.VK_RIGHT, KeyEvent.VK_D);
 	public Key up = new Key(KeyEvent.VK_UP, KeyEvent.VK_W);
 	public Key down = new Key(KeyEvent.VK_DOWN, KeyEvent.VK_S);
@@ -70,11 +71,11 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 		return RMBDown && !RMBWasDown;
 	}
 	
-	public int getMouseX(){
+	public int getMouseX(){		//coordinats in mapcoordinats!
 		return mouseX;
 	}
 	
-	public int getMouseY(){
+	public int getMouseY(){		//coordinats in mapcoordinats!
 		return mouseY;
 	}
 	
@@ -145,7 +146,7 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 	
 	public class Key {
 		private final int[] keys;
-		private boolean pressed = false, wasPressed = false;
+		private boolean pressed = false, wasPressed = false, wasWasPressed;
 		private int timePressed = 0;
 		
 		public Key(int...keys){
@@ -154,6 +155,7 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 		}
 		
 		public void update(){
+			wasWasPressed = wasPressed;
 			wasPressed = pressed;
 			
 			if(pressed) timePressed++;
@@ -183,7 +185,7 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 		}
 		
 		public boolean isTapped(){
-			return pressed && !wasPressed;
+			return pressed && !wasWasPressed;
 		}
 		
 		public boolean isPressed(){

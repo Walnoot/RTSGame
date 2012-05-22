@@ -32,11 +32,15 @@ public class TextPopup extends Popup {
 		
 		for(int i = 0; i < text.length; i++){
 			//g.drawString(text[i], getscreenX() + 16, getScreenY() + 16 + i * RTSFont.HEIGHT);
-			Screen.font.drawLine(g, text[i], getscreenX() + 16, getScreenY() + 16 + i * RTSFont.HEIGHT);
+			Screen.font.drawLine(g, text[i], getScreenX() + 16, getScreenY() + 16 + i * RTSFont.HEIGHT);
 		}
 	}
 	
-	public void update(){
+	public void update(int translationX, int translationY){
 		
 	}
+
+	public void onLeftClick() {}
+	public boolean isInPopup(){
+		return false;}
 }

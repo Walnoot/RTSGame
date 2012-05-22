@@ -20,7 +20,9 @@ public abstract class Popup {
 	}
 	
 	public abstract void render(Graphics g);
-	public abstract void update();
+	public abstract void update(int translationX, int translationY);
+	public abstract void onLeftClick();
+	public abstract boolean isInPopup();
 	
 	protected void drawBox(Graphics g, int width, int height, int screenX, int screenY){
 		for(int x = 0; x < width; x++){
@@ -39,14 +41,14 @@ public abstract class Popup {
 	}
 	
 	protected void drawBox(Graphics g, int width, int height){
-		drawBox(g, width, height, getscreenX(), getScreenY());
+		drawBox(g, width, height, getScreenX(), getScreenY());
 	}
 	
 	public Entity getOwner(){
 		return owner;
 	}
 	
-	protected int getscreenX(){
+	protected int getScreenX(){
 		return owner.getScreenX();
 	}
 	
