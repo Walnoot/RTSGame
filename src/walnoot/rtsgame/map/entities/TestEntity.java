@@ -8,16 +8,14 @@ import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tribes.Tribe;
-import walnoot.rtsgame.popups.Option;
 import walnoot.rtsgame.popups.OptionsPopup;
-import walnoot.rtsgame.popups.TextPopup;
 import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
 
 public class TestEntity extends MovingEntity {
 	private String name;
 	private ArrayList<ItemEntity> inventory = new ArrayList<ItemEntity>();
-	private int LastSelectedOption = -1;
+	private int lastSelectedOption = -1;
 	
 	public TestEntity(Map map, int xPos, int yPos, Tribe tribe){
 		super(map, xPos, yPos, tribe);
@@ -65,11 +63,11 @@ public class TestEntity extends MovingEntity {
 	}
 	
 	public void setSelectedOption(int index){
-		LastSelectedOption = index;
+		lastSelectedOption = index;
 	}
 	
 	public int getSelectedOption(){
-		return LastSelectedOption;
+		return lastSelectedOption;
 	}
 
 }

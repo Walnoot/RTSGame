@@ -4,12 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.Map;
-import walnoot.rtsgame.popups.OptionsPopup;
-import walnoot.rtsgame.popups.TextPopup;
-import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
 
 public class DeerEntity extends MovingEntity {

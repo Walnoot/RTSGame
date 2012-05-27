@@ -2,11 +2,9 @@ package walnoot.rtsgame.popups;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.ArrayList;
 
 import walnoot.rtsgame.InputHandler;
-import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.entities.Entity;
 import walnoot.rtsgame.map.entities.MovingEntity;
 import walnoot.rtsgame.screen.RTSFont;

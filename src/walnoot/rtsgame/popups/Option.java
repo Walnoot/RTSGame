@@ -18,11 +18,11 @@ public class Option {
 		return name;
 	}
 	
-	public void render(Graphics g,OptionsPopup popup, int index){
+	public void render(Graphics g, OptionsPopup popup, int index){
 		Screen.font.drawLine(g, name, popup.getScreenX() + 16, popup.getScreenY() + 16 + index * RTSFont.HEIGHT);
 	}
 	
-	public void renderInColor(Graphics g,OptionsPopup popup, int index, Color c){
+	public void renderInColor(Graphics g, OptionsPopup popup, int index, Color c){
 		Screen.font.drawLineAndShadow(g, name, popup.getScreenX() + 16, popup.getScreenY() + 16 + index * RTSFont.HEIGHT, c);
 	}
 }
