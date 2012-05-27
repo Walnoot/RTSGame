@@ -26,4 +26,5 @@ public class Util {
 	public static int getMapY(int screenX, int screenY){
 		return (int) Math.floor((screenY / 16.0) + ((screenX - Tile.WIDTH / 2) / 32.0));
 	}
-}
+}	
+	

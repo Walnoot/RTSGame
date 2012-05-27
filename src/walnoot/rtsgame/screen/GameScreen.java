@@ -46,7 +46,7 @@ public class GameScreen extends Screen {
 		selectedEntity.setTribe(tribe);
 		
 		map.addEntity(new DeerEntity(map, 4, goodYPos)); //voor de test, later weghalen
-		map.addEntity(new TentStructure(map, 4, goodYPos + 1, tribe)); //voor de test, later weghalen
+		map.addEntity(new TentStructure(map, 4, goodYPos + 10, tribe)); //voor de test, later weghalen
 		
 		translationX = -selectedEntity.getScreenX();
 		translationY = -selectedEntity.getScreenY();
@@ -60,7 +60,7 @@ public class GameScreen extends Screen {
 		g.translate(translation.x, translation.y);
 		if(popup != null) popup.render(g);
 		g.translate(-translation.x, -translation.y);
-		
+	
 		int x = getMapX();
 		int y = getMapY();
 		
@@ -82,11 +82,18 @@ public class GameScreen extends Screen {
 		if(input.right.isPressed()) translationX -= 5;
 		
 		if(input.LMBTapped()){
-			selectedEntity = map.getEntity(getMapX(), getMapY());
+			if(popup != null){
+				popup.onLeftClick();
+			}
+			if(popup != null && !popup.isInPopup()){
+				selectedEntity = map.getEntity(getMapX(), getMapY());
+			}else if( popup == null){
+				selectedEntity = map.getEntity(getMapX(), getMapY());
+			}
 		}
 		
 		if(popup != null){
-			popup.update();
+			popup.update(translationX,translationY);
 			if(popup.getOwner() != selectedEntity) popup = null;
 		}
 		if(input.RMBTapped()){
@@ -96,6 +103,7 @@ public class GameScreen extends Screen {
 				selectedEntity.onRightClick(this, input);
 			}else if(selectedEntity instanceof MovingEntity){
 				((MovingEntity) selectedEntity).moveTo(new Point(getMapX(), getMapY()));
+				popup = null;
 			}
 		}
 	}

@@ -85,10 +85,8 @@ public class RTSComponent extends Canvas implements Runnable {
 			long timePassed = System.nanoTime() - totalTime; //hoeveel tijd er verstreken is sinds de vorige update
 			totalTime += timePassed;
 			tickTime += timePassed / 1000000.0;
-			
-			//screen.update((double)timePassed / 1000000.0);
-			
 			boolean shouldRender = false;
+			
 			while(tickTime > MS_PER_TICK){
 				tickTime -= MS_PER_TICK;
 				shouldRender = true;
@@ -99,6 +97,8 @@ public class RTSComponent extends Canvas implements Runnable {
 				input.update();
 				
 				if(input.escape.isPressed()) stop();
+				if(input.fullScreen.isTapped()) fullScreenManager.switchFullScreen();
+				
 			}
 			
 			if(isShowing() && shouldRender){

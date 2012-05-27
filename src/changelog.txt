@@ -9,5 +9,6 @@ changelog:
 5*4*2012
 	map weer teruggezet naar een array([][])
 16*5*2012
+	OVER NAAR GIT
 	weer begonnen met changelog bijhouden
 	begonnen met itemEntities;

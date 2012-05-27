@@ -84,4 +84,8 @@ public abstract class MovingEntity extends Entity {
 	
 	/** @return tijd die het duurt om over 1 tile te bewegen */
 	protected abstract double getTravelTime();
+
+	public abstract int getSelectedOption() ;
+
+	public abstract void setSelectedOption(int indexSelected) ;
 }
