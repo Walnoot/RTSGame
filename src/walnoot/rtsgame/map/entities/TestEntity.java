@@ -8,6 +8,7 @@ import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tribes.Tribe;
+import walnoot.rtsgame.popups.Option;
 import walnoot.rtsgame.popups.OptionsPopup;
 import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
@@ -46,8 +47,16 @@ public class TestEntity extends MovingEntity {
 	}
 	
 	public void onRightClick(GameScreen screen, InputHandler input){
+		Option option1 = new Option("option 1") {
+			public void onClick() {
+				System.out.println("ONCLICK");
+			}
+		};
 		
-		screen.setPopup(new OptionsPopup(input, this, "Option 1", "Option 2",  "Option 3"));
+		OptionsPopup popup =  new OptionsPopup(input, this);
+		popup.addOption(option1);
+		
+		screen.setPopup(popup);
 	}
 	
 	protected double getTravelTime(){

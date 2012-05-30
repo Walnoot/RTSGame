@@ -6,11 +6,11 @@ import java.awt.Graphics;
 import walnoot.rtsgame.screen.RTSFont;
 import walnoot.rtsgame.screen.Screen;
 
-public class Option {
+public abstract class Option {
 	public String name;
 	
 	
-	public Option(String name, int Index){
+	public Option(String name){
 		this.name = name;
 	}
 	
@@ -25,4 +25,6 @@ public class Option {
 	public void renderInColor(Graphics g, OptionsPopup popup, int index, Color c){
 		Screen.font.drawLineAndShadow(g, name, popup.getScreenX() + 16, popup.getScreenY() + 16 + index * RTSFont.HEIGHT, c);
 	}
+	
+	public abstract void onClick();
 }
