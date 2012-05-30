@@ -47,14 +47,19 @@ public class TestEntity extends MovingEntity {
 	}
 	
 	public void onRightClick(GameScreen screen, InputHandler input){
+		OptionsPopup popup =  new OptionsPopup(input, this);
+		Option option2 = new Option("option 2 !!!!!!!! (extra lange zin zo...)"){
+			public void onClick() {
+				
+			}
+		};
 		Option option1 = new Option("option 1") {
 			public void onClick() {
 				System.out.println("ONCLICK");
 			}
 		};
-		
-		OptionsPopup popup =  new OptionsPopup(input, this);
 		popup.addOption(option1);
+		popup.addOption(option2);
 		
 		screen.setPopup(popup);
 	}
