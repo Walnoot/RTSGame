@@ -32,7 +32,7 @@ public class OptionsPopup extends Popup {
 			this.options.add(options[i]);
 		}
 		
-		height = RTSFont.HEIGHT *( options.length+1);
+		height = RTSFont.HEIGHT *( options.length);
 		System.out.println(width);
 	}
 
@@ -46,9 +46,9 @@ public class OptionsPopup extends Popup {
 				options.get(i).renderInColor(g, this, i, Color.BLUE);
 			}else if(i == indexHighlighted){
 				options.get(i).renderInColor(g, this, i, Color.RED);
+			}else{
+				options.get(i).render(g,this, i);
 			}
-			
-			options.get(i).render(g,this, i);
 		}
 		
 	}
@@ -59,7 +59,7 @@ public class OptionsPopup extends Popup {
 		screenX = getScreenX() + translationX;
 		screenY = getScreenY() + translationY;
 		
-		if(isInPopup()){
+		if(isInPopup(input.getMouseX(),input.getMouseX())){
 			indexHighlighted = (mouseY - 16 - screenY)/RTSFont.HEIGHT;
 		}else{
 			indexHighlighted = -1;
@@ -73,11 +73,10 @@ public class OptionsPopup extends Popup {
 		if(lineWidth > width) width = lineWidth;
 	}
 	
-	public boolean isInPopup(){
-		/*if(input.getMouseY() > screenY + 16 && input.getMouseY() < screenY + 16 + height && input.getMouseX() > screenX +16 && input.getMouseX() < screenX +16 + width){
-			return true;
+	public boolean isInPopup(int mouseX, int mouseY){
+		if(mouseY >= screenY && mouseY < screenY + height   ){
+			
 		}
-		return false;*/
 		
 		//TODO: dit laten werken
 		return true;
@@ -90,7 +89,7 @@ public class OptionsPopup extends Popup {
 	}
 
 	public void onLeftClick() {
-		if(isInPopup()){
+		if(isInPopup(input.getMouseX(),input.getMouseY())){
 			indexSelected = (input.getMouseY() - 16 - screenY)/RTSFont.HEIGHT;
 			if(getOption(indexSelected) != null){	
 				getOption(indexSelected).onClick();

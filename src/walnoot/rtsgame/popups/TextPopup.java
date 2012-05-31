@@ -41,6 +41,6 @@ public class TextPopup extends Popup {
 	}
 
 	public void onLeftClick() {}
-	public boolean isInPopup(){
+	public boolean isInPopup(int x , int y){
 		return false;}
 }

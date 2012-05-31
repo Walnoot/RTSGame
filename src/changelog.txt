@@ -12,3 +12,7 @@ changelog:
 	OVER NAAR GIT
 	weer begonnen met changelog bijhouden
 	begonnen met itemEntities;
+31*5*2012
+	popups gemaakt;
+	ook OptionsPopup en de Options.
+

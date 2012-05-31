@@ -85,7 +85,7 @@ public class GameScreen extends Screen {
 			if(popup != null){
 				popup.onLeftClick();
 			}
-			if(popup != null && !popup.isInPopup()){
+			if(popup != null && !popup.isInPopup(input.getMouseX(), input.getMouseY())){
 				selectedEntity = map.getEntity(getMapX(), getMapY());
 			}else if( popup == null){
 				selectedEntity = map.getEntity(getMapX(), getMapY());

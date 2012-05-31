@@ -22,7 +22,7 @@ public abstract class Popup {
 	public abstract void render(Graphics g);
 	public abstract void update(int translationX, int translationY);
 	public abstract void onLeftClick();
-	public abstract boolean isInPopup();
+	public abstract boolean isInPopup(int x, int y);
 	
 	protected void drawBox(Graphics g, int width, int height, int screenX, int screenY){
 		for(int x = 0; x < width; x++){
