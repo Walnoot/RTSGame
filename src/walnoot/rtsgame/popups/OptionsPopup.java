@@ -13,7 +13,6 @@ import walnoot.rtsgame.screen.Screen;
 public class OptionsPopup extends Popup {
 	private final ArrayList<Option> options = new ArrayList<Option>();
 	private int width, height;
-	//private Option optionSelected;
 	int indexSelected = -1;
 	int indexHighlighted = -1;
 	int screenX = 0, screenY = 0;
@@ -29,13 +28,14 @@ public class OptionsPopup extends Popup {
 		
 		for(int i = 0; i < options.length; i++){
 			int lineWidth = Screen.font.getLineWidth(options[i].getName());
-			
 			if(lineWidth > width) width = lineWidth;
 			this.options.add(options[i]);
 		}
 		
-		height = RTSFont.HEIGHT * options.length;
+		height = RTSFont.HEIGHT *( options.length+1);
+		System.out.println(width);
 	}
+
 
 	public void render(Graphics g){
 		g.setColor(Color.BLACK);
@@ -51,16 +51,9 @@ public class OptionsPopup extends Popup {
 			options.get(i).render(g,this, i);
 		}
 		
-		//g.drawLine(getScreenX(), getScreenY(), getScreenX()+20, getScreenY()+20);
-		//g.setColor(Color.RED);
-		//g.drawLine(input.getMouseX(), input.getMouseY(), input.getMouseX()+10, input.getMouseY()+10);
-		//g.setColor(Color.BLACK);
-		//System.out.println(input.getMouseX() + " " + input.getMouseY() + "     " + getScreenX() + "  " + getScreenY());
-		
 	}
 	
 	public void update(int translationX, int translationY){
-		//int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
 		
 		screenX = getScreenX() + translationX;
@@ -76,6 +69,8 @@ public class OptionsPopup extends Popup {
 	
 	public void addOption(Option option){
 		options.add(option);
+		int lineWidth = Screen.font.getLineWidth(option.getName());
+		if(lineWidth > width) width = lineWidth;
 	}
 	
 	public boolean isInPopup(){
@@ -89,15 +84,17 @@ public class OptionsPopup extends Popup {
 	}
 	
 	public Option getOption(int index){
-		return options.get(index);
+		if(index < options.size() && index >= 0) return options.get(index);
+		else return null;
+		
 	}
 
 	public void onLeftClick() {
 		if(isInPopup()){
 			indexSelected = (input.getMouseY() - 16 - screenY)/RTSFont.HEIGHT;
-			
-			options.get(indexSelected).onClick();
-			
+			if(getOption(indexSelected) != null){	
+				getOption(indexSelected).onClick();
+			}
 			if(owner instanceof MovingEntity)
 				((MovingEntity) owner).setSelectedOption(indexSelected);
 		}else{

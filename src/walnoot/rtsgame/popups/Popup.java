@@ -26,10 +26,10 @@ public abstract class Popup {
 	
 	protected void drawBox(Graphics g, int width, int height, int screenX, int screenY){
 		for(int x = 0; x < width; x++){
-				int xp = x; //x coordinate on gui.png
-				if(x == width - 1) xp = 2; 
-				else if(x > 0) xp = 1;
-				
+			int xp = x; //x coordinate on gui.png
+			if(x == width - 1) xp = 2; 
+			else if(x > 0) xp = 1;
+			
 			for(int y = 0; y < height; y++){
 				int yp = y; //y coordinate on gui.png
 				if(y == height - 1) yp = 2; 

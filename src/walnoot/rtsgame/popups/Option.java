@@ -8,6 +8,7 @@ import walnoot.rtsgame.screen.Screen;
 
 public abstract class Option {
 	public String name;
+	public Popup pupup;
 	
 	
 	public Option(String name){
