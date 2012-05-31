@@ -18,7 +18,7 @@ public abstract class BasicStructure extends Structure {
 	}
 	
 	public void render(Graphics g){
-		g.drawImage(image, getScreenX() - Tile.WIDTH / 2, getScreenY() - (getHeadSpace() * Tile.HEIGHT) + Tile.HEIGHT / 2, null);
+		g.drawImage(image, getScreenX() - (Tile.WIDTH / 2) * (getSize() - 1), getScreenY() - (getHeadSpace() * Tile.HEIGHT) + (Tile.HEIGHT / 2) * (getSize() - 1), null);
 	}
 	
 	private void loadImage(int textureX, int textureY){

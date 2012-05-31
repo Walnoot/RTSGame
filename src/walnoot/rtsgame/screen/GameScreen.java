@@ -13,6 +13,7 @@ import walnoot.rtsgame.map.entities.DeerEntity;
 import walnoot.rtsgame.map.entities.Entity;
 import walnoot.rtsgame.map.entities.MovingEntity;
 import walnoot.rtsgame.map.entities.TestEntity;
+import walnoot.rtsgame.map.structures.CampFireStructure;
 import walnoot.rtsgame.map.structures.TentStructure;
 import walnoot.rtsgame.map.tribes.Tribe;
 import walnoot.rtsgame.popups.Popup;
@@ -47,6 +48,7 @@ public class GameScreen extends Screen {
 		
 		map.addEntity(new DeerEntity(map, 4, goodYPos)); //voor de test, later weghalen
 		map.addEntity(new TentStructure(map, 4, goodYPos + 10, tribe)); //voor de test, later weghalen
+		map.addEntity(new CampFireStructure(map, 4, goodYPos + 12, tribe)); //voor de test, later weghalen
 		
 		translationX = -selectedEntity.getScreenX();
 		translationY = -selectedEntity.getScreenY();
