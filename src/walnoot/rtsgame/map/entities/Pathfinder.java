@@ -104,9 +104,17 @@ public class Pathfinder {
 			int parentG = 0;
 			if(parent != null){
 				parentG += parent.g;
-				parentG += (getDirection().isDiagonal() ? 14 : 10);
+				parentG += (isDiagonal() ? 14 : 10);
 			}
 			g = parentG;
+		}
+		
+		public boolean isDiagonal(){
+			int dx = posX - parent.posX;
+			int dy = posY - parent.posY;
+			
+			if(dx == 0 || dy == 0) return false;
+			return true;
 		}
 		
 		public Direction getDirection(){

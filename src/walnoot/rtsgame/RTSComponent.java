@@ -114,12 +114,6 @@ public class RTSComponent extends Canvas implements Runnable {
 			}
 			
 			fullScreenManager.update();
-			
-			try{
-				Thread.sleep(1);
-			}catch(InterruptedException e){
-				e.printStackTrace();
-			}
 		}
 		System.exit(-1); //stopt het hele programma
 	}
