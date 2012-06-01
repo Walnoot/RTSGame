@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import walnoot.rtsgame.Images;
 import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.map.entities.Entity;
 import walnoot.rtsgame.map.entities.MovingEntity;
@@ -12,7 +13,7 @@ import walnoot.rtsgame.screen.Screen;
 
 public class OptionsPopup extends Popup {
 	private final ArrayList<Option> options = new ArrayList<Option>();
-	private int width, height;
+	private int width, height = 0;
 	int indexSelected = -1;
 	int indexHighlighted = -1;
 	int screenX = 0, screenY = 0;
@@ -51,6 +52,7 @@ public class OptionsPopup extends Popup {
 			}
 		}
 		
+		
 	}
 	
 	public void update(int translationX, int translationY){
@@ -59,11 +61,12 @@ public class OptionsPopup extends Popup {
 		screenX = getScreenX() + translationX;
 		screenY = getScreenY() + translationY;
 		
-		if(isInPopup(input.getMouseX(),input.getMouseX())){
-			indexHighlighted = (mouseY - 16 - screenY)/RTSFont.HEIGHT;
+		if(isInPopup(input.getMouseX(),input.getMouseY())){
+			indexHighlighted = (mouseY  - 16- screenY)/RTSFont.HEIGHT;
 		}else{
 			indexHighlighted = -1;
 		}
+		
 		
 	}
 	
@@ -71,15 +74,14 @@ public class OptionsPopup extends Popup {
 		options.add(option);
 		int lineWidth = Screen.font.getLineWidth(option.getName());
 		if(lineWidth > width) width = lineWidth;
+		height++;
 	}
 	
 	public boolean isInPopup(int mouseX, int mouseY){
-		if(mouseY >= screenY && mouseY < screenY + height   ){
-			
+		if(mouseY > screenY + Images.gui[0][0].getHeight() && mouseY < screenY + height + 2 * Images.gui[0][0].getHeight() && mouseX >= screenX && mouseX < screenX + width + 2* Images.gui[0][0].getWidth()){
+			return true;
 		}
-		
-		//TODO: dit laten werken
-		return true;
+		return false;
 	}
 	
 	public Option getOption(int index){
