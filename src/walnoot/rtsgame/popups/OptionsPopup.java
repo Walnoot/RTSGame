@@ -21,11 +21,11 @@ public class OptionsPopup extends Popup {
 	public OptionsPopup(InputHandler input, Entity owner, Option...options){
 		super(input, owner);
 		
-		if(owner instanceof MovingEntity){
+		/*if(owner instanceof MovingEntity){
 			if (((MovingEntity) owner).getSelectedOption() != -1){
 				indexSelected = ((MovingEntity) owner).getSelectedOption();
 			}
-		}
+		}*/
 		
 		for(int i = 0; i < options.length; i++){
 			int lineWidth = Screen.font.getLineWidth(options[i].getName());
@@ -40,7 +40,7 @@ public class OptionsPopup extends Popup {
 
 	public void render(Graphics g){
 		g.setColor(Color.BLACK);
-		drawBox(g, width / 16 + 3, height / 16 + 3);
+		drawBox(g, width / 16 + 3, (height*RTSFont.HEIGHT)/ 16 + 3);
 		
 		for(int i = 0; i < options.size(); i++){
 			if(i == indexSelected){
@@ -78,7 +78,8 @@ public class OptionsPopup extends Popup {
 	}
 	
 	public boolean isInPopup(int mouseX, int mouseY){
-		if(mouseY > screenY + Images.gui[0][0].getHeight() && mouseY < screenY + height + 2 * Images.gui[0][0].getHeight() && mouseX >= screenX && mouseX < screenX + width + 2* Images.gui[0][0].getWidth()){
+		if(mouseY > screenY + Images.gui[0][0].getHeight() && mouseY < screenY + height*RTSFont.HEIGHT/ + 2 * Images.gui[0][0].getHeight() && mouseX >= screenX && mouseX < screenX + width + 2* Images.gui[0][0].getWidth()){
+			System.out.println("in");
 			return true;
 		}
 		return false;

@@ -14,7 +14,7 @@ public abstract class Entity {
 	public int xPos;
 	public int yPos;
 	protected int health;
-	private Tribe tribe;
+	public Tribe tribe;
 	
 	public Entity(Map map, int xPos, int yPos, Tribe tribe){
 		this.map = map;
@@ -26,16 +26,10 @@ public abstract class Entity {
 	}
 	
 	public abstract void update();
-	
 	public abstract void render(Graphics g);
-	
 	public abstract int getMaxHealth();
-	
 	public abstract String getName();
-	
-	public void onRightClick(GameScreen screen, InputHandler input){
-	}
-	
+	public void onRightClick(GameScreen screen, InputHandler input){}
 	public int getHealth(){
 		return health;
 	}
