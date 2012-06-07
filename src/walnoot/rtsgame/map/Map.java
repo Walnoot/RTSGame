@@ -133,7 +133,14 @@ public class Map {
 	}
 	
 	public void addEntity(Entity u){
-		entities.add(u);
+		if(getEntity(u.xPos, u.yPos)== null){
+
+			entities.add(u);
+		}
+	}
+	
+	public void changeTile(int xPos, int yPos, Tile t){
+		surface[xPos][yPos] = t;
 	}
 	
 	public void removeEntity(Entity u){
