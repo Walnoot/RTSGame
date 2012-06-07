@@ -10,6 +10,7 @@ import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tribes.Tribe;
 import walnoot.rtsgame.popups.Option;
 import walnoot.rtsgame.popups.OptionsPopup;
+import walnoot.rtsgame.popups.TextPopup;
 import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
 
@@ -62,6 +63,8 @@ public class TestEntity extends MovingEntity {
 		popup.addOption(option2);
 		
 		screen.setPopup(popup);
+		
+		//screen.setPopup(new TextPopup(input, this, "ljhadfl;ewr", "daloshjrew"));
 	}
 	
 	protected double getTravelTime(){

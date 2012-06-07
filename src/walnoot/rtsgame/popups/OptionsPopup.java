@@ -17,6 +17,7 @@ public class OptionsPopup extends Popup {
 	int indexSelected = -1;
 	int indexHighlighted = -1;
 	int screenX = 0, screenY = 0;
+	private boolean dimensionsSet = false;
 
 	public OptionsPopup(InputHandler input, Entity owner, Option...options){
 		super(input, owner);
@@ -28,19 +29,17 @@ public class OptionsPopup extends Popup {
 		}
 		
 		for(int i = 0; i < options.length; i++){
-			int lineWidth = Screen.font.getLineWidth(options[i].getName());
-			if(lineWidth > width) width = lineWidth;
 			this.options.add(options[i]);
 		}
-		
-		height = RTSFont.HEIGHT *( options.length);
-		System.out.println(width);
 	}
 
 
 	public void render(Graphics g){
+		if(!dimensionsSet) setDimensions();
+		dimensionsSet = true;
+		
 		g.setColor(Color.BLACK);
-		drawBox(g, width / 16 + 3, height / 16 + 3);
+		drawBox(g, width, height);
 		
 		for(int i = 0; i < options.size(); i++){
 			if(i == indexSelected){
@@ -55,6 +54,17 @@ public class OptionsPopup extends Popup {
 		
 	}
 	
+	private void setDimensions(){
+		for(int i = 0; i < options.size(); i++){
+			int lineWidth = Screen.font.getLineWidth(options.get(i).getName());
+			if(lineWidth > width) width = lineWidth;
+		}
+		
+		width += EMPTY_SPACE;
+		height = RTSFont.HEIGHT * (options.size()) + EMPTY_SPACE;
+	}
+
+
 	public void update(int translationX, int translationY){
 		int mouseY = input.getMouseY();
 		

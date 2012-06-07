@@ -22,17 +22,18 @@ public class TextPopup extends Popup {
 			if(lineWidth > width) width = lineWidth;
 		}
 		
-		height = RTSFont.HEIGHT * text.length;
+		height = RTSFont.HEIGHT * text.length + EMPTY_SPACE;
+		width += EMPTY_SPACE;
 	}
 	
 	public void render(Graphics g){
-		drawBox(g, width / 16 + 3, height / 16 + 3);
+		drawBox(g, width, height);
 		
 		g.setColor(Color.BLACK);
 		
 		for(int i = 0; i < text.length; i++){
 			//g.drawString(text[i], getscreenX() + 16, getScreenY() + 16 + i * RTSFont.HEIGHT);
-			Screen.font.drawLine(g, text[i], getScreenX() + 16, getScreenY() + 16 + i * RTSFont.HEIGHT);
+			Screen.font.drawLine(g, text[i], getScreenX() + EMPTY_SPACE / 2, getScreenY() + EMPTY_SPACE / 2 + i * RTSFont.HEIGHT);
 		}
 	}
 	
