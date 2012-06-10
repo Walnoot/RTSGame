@@ -117,11 +117,10 @@ public class Map {
 	}
 	
 	public Tile getTile(int x, int y){
-		try{
-			return surface[x][y];
-		}catch(ArrayIndexOutOfBoundsException e){
-			return null;
-		}
+		if(x < 0 || y < 0) return null;
+		if(x >= getWidth() || y > getLength()) return null;
+		 
+		return surface[x][y];
 	}
 	
 	public int getWidth(){

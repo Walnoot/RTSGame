@@ -29,7 +29,16 @@ public abstract class Entity {
 	public abstract void render(Graphics g);
 	public abstract int getMaxHealth();
 	public abstract String getName();
-	public void onRightClick(GameScreen screen, InputHandler input){}
+	
+	/**
+	 * @param entityClicked Entity that is right-clicked
+	 * @param screen
+	 * @param input
+	 * @return whether this Entity can move after onRightClick()
+	 */
+	public boolean onRightClick(Entity entityClicked, GameScreen screen, InputHandler input){
+		return true;
+	}
 	public int getHealth(){
 		return health;
 	}

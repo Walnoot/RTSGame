@@ -4,13 +4,14 @@ import java.awt.Point;
 import java.util.LinkedList;
 
 import walnoot.rtsgame.RTSComponent;
+import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.Direction;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tribes.Tribe;
 
 public abstract class MovingEntity extends Entity {
 	protected double timeTraveled; //hoelang hij onderweg is
-	protected Direction direction = Direction.EAST;
+	private Entity goal = null;
 	
 	private LinkedList<Direction> nextDirections = new LinkedList<Direction>();
 	
@@ -19,13 +20,25 @@ public abstract class MovingEntity extends Entity {
 	}
 	
 	public void update(){
+		Direction nextDirection = null;
 		if(nextDirections.isEmpty()){
-			timeTraveled = 0;
-			return;
+			if(goal != null){
+				int dx = goal.xPos - this.xPos;
+				int dy = goal.yPos - this.yPos;
+				
+				if(Util.abs(dx) <= 1 && Util.abs(dy) <= 1) return;
+				
+				if(dx > 1) dx = 1;
+				if(dx < -1) dx = -1;
+				
+				if(dy > 1) dy = 1;
+				if(dy < -1) dy = -1;
+				
+				nextDirections.add(Direction.getDirection(dx, dy));
+			}else return;
 		}
 		
-		Direction nextDirection = nextDirections.get(0);
-		if(nextDirection == null) nextDirection = direction;
+		nextDirection = nextDirections.get(0);
 		
 		timeTraveled += RTSComponent.MS_PER_TICK / (getTravelTime() * (nextDirection.isDiagonal() ? Math.sqrt(2) : 1.0));
 		
@@ -37,10 +50,8 @@ public abstract class MovingEntity extends Entity {
 				onStopMoving();
 			}
 			
-			direction = nextDirection;
-			
-			xPos += direction.getxOffset();
-			yPos += direction.getyOffset();
+			xPos += nextDirection.getxOffset();
+			yPos += nextDirection.getyOffset();
 			
 			if(!nextDirections.isEmpty()) nextDirections.remove(0);
 		}
@@ -48,8 +59,14 @@ public abstract class MovingEntity extends Entity {
 	
 	protected void onStopMoving(){
 	}
+	
+	public void follow(Entity e){
+		goal = e;
+	}
 
 	public void moveTo(Point goal){
+		this.goal = null;
+		
 		LinkedList<Direction> path = Pathfinder.moveTo(new Point(xPos, yPos), goal, map);
 		if(path != null) nextDirections = path;
 	}
@@ -61,11 +78,10 @@ public abstract class MovingEntity extends Entity {
 	public int getScreenX(){
 		int x = super.getScreenX();
 		
-		Direction direction;
+		Direction direction = null;
 		if(!nextDirections.isEmpty()) direction = nextDirections.get(0);
-		else direction = this.direction;
 		
-		x += Math.round(direction.getPointOnScreen().x * timeTraveled);
+		if(direction != null) x += Math.round(direction.getPointOnScreen().x * timeTraveled);
 		
 		return x;
 	}
@@ -73,11 +89,10 @@ public abstract class MovingEntity extends Entity {
 	public int getScreenY(){
 		int y = super.getScreenY();
 		
-		Direction direction;
+		Direction direction = null;
 		if(!nextDirections.isEmpty()) direction = nextDirections.get(0);
-		else direction = this.direction;
 		
-		y += Math.round(direction.getPointOnScreen().y * timeTraveled);
+		if(direction != null) y += Math.round(direction.getPointOnScreen().y * timeTraveled);
 		
 		return y;
 	}

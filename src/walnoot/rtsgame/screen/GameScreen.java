@@ -13,8 +13,6 @@ import walnoot.rtsgame.map.entities.DeerEntity;
 import walnoot.rtsgame.map.entities.Entity;
 import walnoot.rtsgame.map.entities.MovingEntity;
 import walnoot.rtsgame.map.entities.TestEntity;
-import walnoot.rtsgame.map.structures.CampFireStructure;
-import walnoot.rtsgame.map.structures.TentStructure;
 import walnoot.rtsgame.map.tribes.Tribe;
 import walnoot.rtsgame.popups.Popup;
 
@@ -24,6 +22,7 @@ public class GameScreen extends Screen {
 	private Popup popup = null;
 	
 	private Entity selectedEntity;
+	private Entity targetEntity; //the Entity the camera will go to
 	
 	private Tribe tribe;
 	
@@ -36,17 +35,20 @@ public class GameScreen extends Screen {
 		
 		for(int i = 4;; i++){
 			if(!map.getTile(4, i).isSolid()){
-				selectedEntity = new TestEntity(map, 4, i, null);
 				goodYPos = i;
 				break;
 			}
 		}
+		
+		selectedEntity = new TestEntity(map, 4, goodYPos, null);
+		targetEntity = selectedEntity;
 		map.addEntity(selectedEntity);
 		
 		tribe = new Tribe("My Tribe", Color.BLUE);
 		selectedEntity.setTribe(tribe);
 		
 		map.addEntity(new DeerEntity(map, 4, goodYPos)); //voor de test, later weghalen
+		map.addEntity(new TestEntity(map, 4, goodYPos - 1, null)); //voor de test, later weghalen
 		//map.addEntity(new TentStructure(map, 4, goodYPos + 10, tribe)); //voor de test, later weghalen
 		//map.addEntity(new CampFireStructure(map, 5, goodYPos + 12, tribe)); //voor de test, later weghalen
 		
@@ -83,6 +85,18 @@ public class GameScreen extends Screen {
 		if(input.left.isPressed()) translationX += 5;
 		if(input.right.isPressed()) translationX -= 5;
 		
+		if(input.space.isPressed()) targetEntity = selectedEntity;
+		
+		if(targetEntity != null){
+			int dx = targetEntity.getScreenX() + (translationX - getWidth() / 2);
+			int dy = targetEntity.getScreenY() + (translationY - getHeight() / 2);
+			
+			translationX -= dx / 10;
+			translationY -= dy / 10;
+			
+			if(Util.abs(dx) < 10 && Util.abs(dy) < 10) targetEntity = null;
+		}
+		
 		if(input.LMBTapped()){
 			if(popup != null){
 				popup.onLeftClick();
@@ -99,13 +113,18 @@ public class GameScreen extends Screen {
 			if(popup.getOwner() != selectedEntity) popup = null;
 		}
 		if(input.RMBTapped()){
-			if(selectedEntity == null) return;
+			//if(selectedEntity == null) return;
 			
-			if(getMapX() == selectedEntity.getxPos() && getMapY() == selectedEntity.getyPos()){
-				selectedEntity.onRightClick(this, input);
-			}else if(selectedEntity instanceof MovingEntity){
-				((MovingEntity) selectedEntity).moveTo(new Point(getMapX(), getMapY()));
-				popup = null;
+			Entity rightClicked = map.getEntity(getMapX(), getMapY()); //the Entity that is right clicked, if any
+			
+			boolean canMove = true;
+			if(rightClicked != null) canMove = selectedEntity.onRightClick(rightClicked, this, input);
+			
+			if(canMove){
+				if(selectedEntity instanceof MovingEntity){
+					((MovingEntity) selectedEntity).moveTo(new Point(getMapX(), getMapY()));
+					popup = null;
+				}
 			}
 		}
 	}

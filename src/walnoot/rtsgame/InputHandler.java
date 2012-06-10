@@ -19,9 +19,8 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 	public Key down = new Key(KeyEvent.VK_DOWN, KeyEvent.VK_S);
 	public Key use = new Key(KeyEvent.VK_ENTER, KeyEvent.VK_E);
 	public Key enter = new Key(KeyEvent.VK_ENTER);
+	public Key space = new Key(KeyEvent.VK_SPACE);
 	public Key escape = new Key(KeyEvent.VK_ESCAPE);
-	public Key shoot = new Key(KeyEvent.VK_SPACE, KeyEvent.VK_CONTROL);
-	public Key save = new Key(KeyEvent.VK_F12);
 	public Key increase = new Key(KeyEvent.VK_PAGE_UP, KeyEvent.VK_E);
 	public Key decrease = new Key(KeyEvent.VK_PAGE_DOWN, KeyEvent.VK_Q);
 	public Key debug = new Key(KeyEvent.VK_F3);
