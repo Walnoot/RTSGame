@@ -8,7 +8,7 @@ import walnoot.rtsgame.screen.Screen;
 
 public abstract class Option {
 	public String name;
-	public Popup pupup;
+	public Popup popup;
 	
 	
 	public Option(String name){
@@ -25,6 +25,10 @@ public abstract class Option {
 	
 	public void renderInColor(Graphics g, OptionsPopup popup, int index, Color c){
 		Screen.font.drawLineAndShadow(g, name, popup.getScreenX() + 16, popup.getScreenY() + 16 + index * RTSFont.HEIGHT, c);
+	}
+	
+	public Popup getPopup(){
+		return popup;
 	}
 	
 	public abstract void onClick();

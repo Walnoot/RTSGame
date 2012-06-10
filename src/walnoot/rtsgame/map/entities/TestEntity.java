@@ -2,14 +2,17 @@ package walnoot.rtsgame.map.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import walnoot.rtsgame.Images;
 import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.Map;
-import walnoot.rtsgame.map.structures.CampFireStructure;
-import walnoot.rtsgame.map.structures.TentStructure;
-import walnoot.rtsgame.map.tiles.Tile;
 import walnoot.rtsgame.map.tribes.Tribe;
 import walnoot.rtsgame.popups.Option;
 import walnoot.rtsgame.popups.OptionsPopup;
@@ -18,91 +21,101 @@ import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
 
 public class TestEntity extends MovingEntity {
-	private String name;
-	private ArrayList<ItemEntity> inventory = new ArrayList<ItemEntity>();
-	private int lastSelectedOption = -1;
 	
-	public TestEntity(Map map, int xPos, int yPos, Tribe tribe){
-		super(map, xPos, yPos, tribe);
-		
-		name = Util.NAME_GEN.getRandomName();
-		
-		//moveRandomLocation();
+	private int counter = 0;
+	private BufferedImage sheep1;
+	private BufferedImage sheep2;
+	private BufferedImage sheep3;
+	private BufferedImage sheep4;
+	private BufferedImage sheep5;
+	private BufferedImage sheep6;
+	private BufferedImage currentSheep;
+	private BufferedImage stillSheep;
+	
+	public static final int WALK_RANGE = 6, WALK_CHANGE = 5;
+
+	public TestEntity(Map map, int xPos, int yPos) {
+		super(map, xPos, yPos, null);
+		sheep1 = Images.sheep[0][0];
+		sheep2 = Images.sheep[1][0];
+		sheep3 = Images.sheep[2][0];
+		sheep4 = Images.sheep[3][0];
+		sheep5 = Images.sheep[4][0];
+		sheep6 = Images.sheep[5][0];
+		stillSheep = Images.sheep[6][0];
+		currentSheep = sheep1;
+	}
+
+	protected double getTravelTime() {
+		return 1000;
 	}
 	
-	public void render(Graphics g){
-		if(getTribe() != null) g.setColor(getTribe().getColor());
-		else g.setColor(Color.BLACK);
-		g.fillRect(getScreenX() + 14, getScreenY() + 6, 4, 4);
+	private BufferedImage getNextSheep(Image prevSheep){
+		if (prevSheep == sheep1) return sheep2;
+		else if (prevSheep == sheep2) return sheep3;
+		else if (prevSheep == sheep3) return sheep4;
+		else if (prevSheep == sheep4) return sheep5;
+		else if (prevSheep == sheep5) return sheep6;
+		else if (prevSheep == sheep6) return sheep1;
+		return null;
 		
-		g.setColor(Color.WHITE);
-		Screen.font.drawBoldLine(g, xPos + ":" + yPos, getScreenX(), getScreenY() - 8, Color.BLACK);
+		
+		
 	}
 	
-	protected void onStopMoving(){
-		Entity e = map.getEntity(xPos, yPos);
-		
-		if(e instanceof ItemEntity){
-			ItemEntity item = (ItemEntity) e;
-			inventory.add(item);
+	public int getSelectedOption() {
+		return -1;
+	}
+	
+	public void update(){
+		if(isMoving()) counter++;
+		if(counter > 5){
+			counter = 0;
+			currentSheep = getNextSheep(currentSheep);
 			
-			map.removeEntity(e);
 		}
+		super.update();
+		
+		if(!isMoving() && Util.RANDOM.nextInt(1000) < WALK_CHANGE) moveRandomLocation(WALK_RANGE);
 	}
 	
 	public void onRightClick(GameScreen screen, InputHandler input){
-		OptionsPopup popup =  new OptionsPopup(input, this);
-		Option option2 = new Option("Add campfire"){
-			public void onClick(){
-				map.addEntity(new CampFireStructure(map, xPos, yPos - 1, tribe));
-			}
-		};
-		Option option1 = new Option("Add tent") {
+		OptionsPopup popup = new OptionsPopup(input, this);
+		Option option1 = new Option("getclosest"){
 			public void onClick() {
-				map.addEntity(new TentStructure(map, xPos, yPos-2, tribe));
-			}
-		};
-		Option dig = new Option("dig"){
-			public void onClick() {
-				int ID = map.getTile(xPos, yPos - 1).getID();
-				if(ID == 0 || ID == 1) map.changeTile(xPos, yPos - 1, Tile.sand1);
-				else if(ID == 17) map.changeTile(xPos, yPos - 1, Tile.water1);
-			}
-		};
-		Option raise = new Option("raise"){
-			public void onClick() {
-				int ID = map.getTile(xPos, yPos - 1).getID();
-				if(ID == 2) map.changeTile(xPos, yPos - 1, Tile.sand1);
-				else if(ID == 17) map.changeTile(xPos, yPos - 1, Tile.grass1);
+				System.out.println(map.getClosestEntity(getxPos(), getyPos()).getName());
 			}
 		};
 		popup.addOption(option1);
-		popup.addOption(option2);
-		popup.addOption(dig);
-		popup.addOption(raise);
+		popup.addOption(new Option("get closest moving entity"){
+			public void onClick() {
+				System.out.println(map.getClosestMovingEntity(getxPos(), getyPos()).getName());
+			}
+		});
 		screen.setPopup(popup);
 		
 		//screen.setPopup(new TextPopup(input, this, "ljhadfl;ewr", "daloshjrew"));
 	}
 	
-	protected double getTravelTime(){
-		return 100;
+	public void setSelectedOption(int indexSelected) {}
+
+	public void render(Graphics g) {
+		g.setColor(Color.GREEN);
+		if(isMoving())g.drawImage(currentSheep, getScreenX(), getScreenY(), null);
+		else g.drawImage(stillSheep, getScreenX(), getScreenY(), null);
+	}
+
+	public int getMaxHealth() {
+		return 5;
+	}
+
+	public String getName() {
+		return "test.";
 	}
 	
-	public int getMaxHealth(){
-		return 10;
-	}
 	
-	public String getName(){
-		return name;
-	}
 	
-	public void setSelectedOption(int index){
-		lastSelectedOption = index;
-	}
 	
-	public int getSelectedOption(){
-		return lastSelectedOption;
-	}
+	
 
 }

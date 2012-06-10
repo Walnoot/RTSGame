@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 
 import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
+import walnoot.rtsgame.screen.TitleScreen;
 
 public class RTSComponent extends Canvas implements Runnable {
 	private static final long serialVersionUID = -1401470770875975471L;

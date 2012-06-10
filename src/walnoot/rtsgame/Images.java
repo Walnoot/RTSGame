@@ -10,6 +10,7 @@ public class Images {
 	public static BufferedImage[][] gui = split(load("/res/gui.png"), 3, 3);
 	public static BufferedImage structures = load("/res/structures.png");
 	public static BufferedImage font = load("/res/font.png");
+	public static BufferedImage[][] sheep = split(load("/res/sheep.png"),7,1);
 	
 	public static BufferedImage load(String fileName){
 		try{

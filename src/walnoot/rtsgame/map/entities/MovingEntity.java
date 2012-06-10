@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.LinkedList;
 
 import walnoot.rtsgame.RTSComponent;
+import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.Direction;
 import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.tribes.Tribe;
@@ -80,6 +81,16 @@ public abstract class MovingEntity extends Entity {
 		y += Math.round(direction.getPointOnScreen().y * timeTraveled);
 		
 		return y;
+	}
+	
+	public void moveRandomLocation(int WALK_RANGE){
+		int x, y;
+		do{
+			x = xPos + Util.RANDOM.nextInt(WALK_RANGE * 2) - WALK_RANGE;
+			y = yPos + Util.RANDOM.nextInt(WALK_RANGE * 2) - WALK_RANGE;
+		}while(map.isSolid(x, y));
+	
+		moveTo(new Point(x, y));
 	}
 	
 	/** @return tijd die het duurt om over 1 tile te bewegen */

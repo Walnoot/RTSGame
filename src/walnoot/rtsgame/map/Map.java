@@ -8,7 +8,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.entities.Entity;
+import walnoot.rtsgame.map.entities.MovingEntity;
+import walnoot.rtsgame.map.entities.SnakeEntity;
 import walnoot.rtsgame.map.structures.Structure;
 import walnoot.rtsgame.map.tiles.Tile;
 
@@ -128,19 +131,52 @@ public class Map {
 		return surface.length;
 	}
 	
+	public Entity getClosestEntity(int x, int y){
+		int closestX, closestY, closestDistance = 999;
+		int xe, ye;
+		Entity closest = new SnakeEntity(null, 0, 0);
+		for(Entity e: entities){
+			xe = e.getxPos();
+			ye = e.getyPos();
+			if(Util.getDistance(x, y, xe, ye) < closestDistance && xe !=x && ye != y){
+				closest = e;
+				closestDistance = Util.getDistance(x, y, xe, ye);
+			}
+		}
+		return closest;
+	}
+	
+	public MovingEntity getClosestMovingEntity(int x, int y){
+		int closestX, closestY, closestDistance = 999;
+		int xe, ye;
+		Entity closest = new SnakeEntity(null, 0, 0); // i had to choose something...
+		for(Entity e: entities){
+			xe = e.getxPos();
+			ye = e.getyPos();
+			if(Util.getDistance(x, y, xe, ye) < closestDistance && xe !=x && ye != y && e instanceof MovingEntity){
+				closest = e;
+				closestDistance = Util.getDistance(x, y, xe, ye);
+			}
+		}
+		return (MovingEntity) closest;
+		
+	}
+	
 	public int getLength(){
 		return surface[0].length;
 	}
 	
 	public void addEntity(Entity u){
-		if(getEntity(u.xPos, u.yPos)== null){
+		if((getEntity(u.xPos, u.yPos)== null)){
 
 			entities.add(u);
 		}
 	}
 	
 	public void changeTile(int xPos, int yPos, Tile t){
-		surface[xPos][yPos] = t;
+		if(getEntity(xPos,yPos)== null){
+			surface[xPos][yPos] = t;
+		}
 	}
 	
 	public void removeEntity(Entity u){
