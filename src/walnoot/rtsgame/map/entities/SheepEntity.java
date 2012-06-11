@@ -59,7 +59,7 @@ public class SheepEntity extends MovingEntity {
 	
 	public void update(){
 		if(isMoving()) counter++;
-		if(counter > 5){
+		if(counter > 30){
 			counter = 0;
 			currentSheep = getNextSheep(currentSheep);
 			
@@ -97,7 +97,7 @@ public class SheepEntity extends MovingEntity {
 
 	public void render(Graphics g) {
 		g.setColor(Color.GREEN);
-		if(isMoving())g.drawImage(currentSheep, getScreenX(), getScreenY(), null);
+		if(isMoving())g.drawImage(Images.sheep[(counter/5)][0], getScreenX(), getScreenY(), null);
 		else g.drawImage(stillSheep, getScreenX(), getScreenY(), null);
 	}
 

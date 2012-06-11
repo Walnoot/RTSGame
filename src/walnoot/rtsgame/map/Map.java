@@ -166,7 +166,7 @@ public class Map {
 	}
 	
 	public void addEntity(Entity u){
-		if((getEntity(u.xPos, u.yPos)== null)){
+		if((getEntity(u.xPos, u.yPos)== null)&& !getTile(u.getxPos(), u.getyPos()).isSolid()){
 
 			entities.add(u);
 		}
