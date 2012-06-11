@@ -17,6 +17,7 @@ public class OptionsPopup extends Popup {
 	int indexSelected = -1;
 	int indexHighlighted = -1;
 	int screenX = 0, screenY = 0;
+	Popup subPopup;
 	private boolean dimensionsSet = false;
 
 	public OptionsPopup(InputHandler input, Entity owner, Option...options){
@@ -31,6 +32,8 @@ public class OptionsPopup extends Popup {
 		for(int i = 0; i < options.length; i++){
 			this.options.add(options[i]);
 		}
+		
+		height = RTSFont.HEIGHT *( options.length);
 	}
 
 
@@ -51,8 +54,6 @@ public class OptionsPopup extends Popup {
 				options.get(i).render(g,this, i);
 			}
 		}
-		
-		
 	}
 	
 	private void setDimensions(){
@@ -61,8 +62,7 @@ public class OptionsPopup extends Popup {
 			if(lineWidth > width) width = lineWidth;
 		}
 		
-		width += EMPTY_SPACE;
-		height = RTSFont.HEIGHT * (options.size()) + EMPTY_SPACE;
+		height = RTSFont.HEIGHT * (options.size());
 	}
 
 
@@ -90,7 +90,6 @@ public class OptionsPopup extends Popup {
 	
 	public boolean isInPopup(int mouseX, int mouseY){
 		if(mouseY > screenY + Images.gui[0][0].getHeight() && mouseY < screenY + height*RTSFont.HEIGHT/ + 2 * Images.gui[0][0].getHeight() && mouseX >= screenX && mouseX < screenX + width + 2* Images.gui[0][0].getWidth()){
-			//System.out.println("in");
 			return true;
 		}
 		return false;
@@ -101,7 +100,7 @@ public class OptionsPopup extends Popup {
 		else return null;
 		
 	}
-
+	
 	public void onLeftClick() {
 		if(isInPopup(input.getMouseX(),input.getMouseY())){
 			indexSelected = (input.getMouseY() - 16 - screenY)/RTSFont.HEIGHT;

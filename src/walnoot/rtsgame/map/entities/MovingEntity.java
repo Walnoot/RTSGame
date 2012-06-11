@@ -97,6 +97,16 @@ public abstract class MovingEntity extends Entity {
 		return y;
 	}
 	
+	public void moveRandomLocation(int WALK_RANGE){
+		int x, y;
+		do{
+			x = xPos + Util.RANDOM.nextInt(WALK_RANGE * 2) - WALK_RANGE;
+			y = yPos + Util.RANDOM.nextInt(WALK_RANGE * 2) - WALK_RANGE;
+		}while(map.isSolid(x, y));
+	
+		moveTo(new Point(x, y));
+	}
+	
 	/** @return tijd die het duurt om over 1 tile te bewegen */
 	protected abstract double getTravelTime();
 

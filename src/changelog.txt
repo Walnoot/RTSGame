@@ -15,4 +15,6 @@ changelog:
 31*5*2012
 	popups gemaakt;
 	ook OptionsPopup en de Options.
-
+10*6*2012
+	MovingEntities can follow other Entitities now
+	The camera can follow an Entitie now

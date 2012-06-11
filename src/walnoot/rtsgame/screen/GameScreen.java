@@ -12,7 +12,8 @@ import walnoot.rtsgame.map.Map;
 import walnoot.rtsgame.map.entities.DeerEntity;
 import walnoot.rtsgame.map.entities.Entity;
 import walnoot.rtsgame.map.entities.MovingEntity;
-import walnoot.rtsgame.map.entities.TestEntity;
+import walnoot.rtsgame.map.entities.PlayerEntity;
+import walnoot.rtsgame.map.entities.SheepEntity;
 import walnoot.rtsgame.map.tribes.Tribe;
 import walnoot.rtsgame.popups.Popup;
 
@@ -35,20 +36,29 @@ public class GameScreen extends Screen {
 		
 		for(int i = 4;; i++){
 			if(!map.getTile(4, i).isSolid()){
+				selectedEntity = new PlayerEntity(map, 4, i, null);
 				goodYPos = i;
 				break;
 			}
 		}
 		
-		selectedEntity = new TestEntity(map, 4, goodYPos, null);
 		targetEntity = selectedEntity;
 		map.addEntity(selectedEntity);
 		
 		tribe = new Tribe("My Tribe", Color.BLUE);
 		selectedEntity.setTribe(tribe);
 		
-		map.addEntity(new DeerEntity(map, 4, goodYPos)); //voor de test, later weghalen
-		map.addEntity(new TestEntity(map, 4, goodYPos - 1, null)); //voor de test, later weghalen
+		map.addEntity(new DeerEntity(map, 4, goodYPos+1)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+2)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+3)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+4)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+5)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+6)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+7)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+8)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+9)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+10)); //voor de test, later weghalen
+		map.addEntity(new SheepEntity(map, 4, goodYPos+11)); //voor de test, later weghalen
 		//map.addEntity(new TentStructure(map, 4, goodYPos + 10, tribe)); //voor de test, later weghalen
 		//map.addEntity(new CampFireStructure(map, 5, goodYPos + 12, tribe)); //voor de test, later weghalen
 		

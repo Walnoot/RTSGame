@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import walnoot.rtsgame.InputHandler;
 import walnoot.rtsgame.Util;
 import walnoot.rtsgame.map.Map;
+import walnoot.rtsgame.map.structures.CampFireStructure;
 import walnoot.rtsgame.map.structures.TentStructure;
 import walnoot.rtsgame.map.tiles.Tile;
 import walnoot.rtsgame.map.tribes.Tribe;
@@ -15,14 +16,13 @@ import walnoot.rtsgame.popups.OptionsPopup;
 import walnoot.rtsgame.screen.GameScreen;
 import walnoot.rtsgame.screen.Screen;
 
-public class TestEntity extends MovingEntity {
+public class PlayerEntity extends MovingEntity {
 	private String name;
 	private ArrayList<ItemEntity> inventory = new ArrayList<ItemEntity>();
 	private int lastSelectedOption = -1;
-	
-	public TestEntity(Map map, int xPos, int yPos, Tribe tribe){
+	InputHandler input;
+	public PlayerEntity(Map map,int xPos, int yPos, Tribe tribe){
 		super(map, xPos, yPos, tribe);
-		
 		name = Util.NAME_GEN.getRandomName();
 		
 		//moveRandomLocation();
@@ -50,10 +50,10 @@ public class TestEntity extends MovingEntity {
 	
 	public boolean onRightClick(Entity entityClicked, GameScreen screen, InputHandler input){
 		if(entityClicked == this){
-			OptionsPopup popup =  new OptionsPopup(input, this);
-			Option option2 = new Option("Add deer"){
+			OptionsPopup popup = new OptionsPopup(input, this);
+			Option option2 = new Option("Add campfire"){
 				public void onClick(){
-					map.addEntity(new DeerEntity(map, xPos, yPos - 1));
+					map.addEntity(new CampFireStructure(map, xPos, yPos - 1, tribe));
 				}
 			};
 			Option option1 = new Option("Add tent") {
@@ -75,16 +75,18 @@ public class TestEntity extends MovingEntity {
 					else if(ID == 17) map.changeTile(xPos, yPos - 1, Tile.grass1);
 				}
 			};
+			Option subPopupTest = new Option ("test"){
+				public void onClick(){
+					
+				}
+			};
 			popup.addOption(option1);
 			popup.addOption(option2);
 			popup.addOption(dig);
 			popup.addOption(raise);
+			popup.addOption(subPopupTest);
 			screen.setPopup(popup);
-			
-			//screen.setPopup(new TextPopup(input, this, "ljhadfl;ewr", "daloshjrew"));
-		}else{
-			follow(entityClicked);
-		}
+		}else follow(entityClicked);
 		
 		return false;
 	}
