@@ -68,4 +68,12 @@ public class Tile {
 	public int getID(){
 		return (int)id;
 	}
+	
+	public static int getHeight(){
+		return Images.terrain[0][0].getHeight();
+	}
+	
+	public static int getWidth(){
+		return Images.terrain[0][0].getWidth();
+	}
 }
