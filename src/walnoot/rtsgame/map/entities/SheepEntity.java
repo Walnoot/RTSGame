@@ -17,16 +17,16 @@ import walnoot.rtsgame.screen.GameScreen;
 public class SheepEntity extends MovingEntity {
 	
 	private int counter = 0;
-	private BufferedImage stillSheep;
+	//private BufferedImage stillSheep;
 	private Animation sheepAnimation;
 	
 	public static final int WALK_RANGE = 6, WALK_CHANGE = 0, TICKS_PER_SHEEP = 5;
 
 	public SheepEntity(Map map, int xPos, int yPos) {
 		super(map, xPos, yPos, null);
-		sheepAnimation = new Animation();
+		sheepAnimation = new Animation(TICKS_PER_SHEEP);
 		for(int i = 0; i < Images.sheep.length-1; i++){
-			sheepAnimation.addScene(Images.sheep[i][0], TICKS_PER_SHEEP);
+			sheepAnimation.addScene(Images.sheep[i][0]);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class SheepEntity extends MovingEntity {
 		if(isMoving()) counter++;
 		if(counter >= TICKS_PER_SHEEP*(Images.sheep.length-1)) counter = 0;
 		super.update();
-		sheepAnimation.update(1);		// 1 tick has passed...
+		sheepAnimation.update();		// 1 tick has passed...
 		if(!isMoving() && Util.RANDOM.nextInt(1000) < WALK_CHANGE) moveRandomLocation(WALK_RANGE);
 	}
 	
@@ -71,19 +71,19 @@ public class SheepEntity extends MovingEntity {
 		return false;
 	}
 	
-	public void setSelectedOption(int indexSelected) {}
+	public void setSelectedOption(int indexSelected){}
 
-	public void render(Graphics g) {
+	public void render(Graphics g){
 		g.setColor(Color.BLACK);
-		if(isMoving())g.drawImage(sheepAnimation.getImage(), getScreenX(), getScreenY()-Tile.getHeight()/2, null);
-		else g.drawImage(Images.sheep[Images.sheep.length-1][0], getScreenX(), getScreenY()-Tile.getHeight()/2, null);
+		if(isMoving()) g.drawImage(sheepAnimation.getImage(), getScreenX(), getScreenY() - Tile.getHeight() / 2, null);
+		else g.drawImage(Images.sheep[Images.sheep.length-1][0], getScreenX(), getScreenY() - Tile.getHeight() / 2, null);
 	}
 
-	public int getMaxHealth() {
+	public int getMaxHealth(){
 		return 5;
 	}
 
-	public String getName() {
+	public String getName(){
 		return "Sheep";
 	}
 }
