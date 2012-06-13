@@ -70,10 +70,10 @@ public class Tile {
 	}
 	
 	public static int getHeight(){
-		return Images.terrain[0][0].getHeight();
+		return HEIGHT;
 	}
 	
 	public static int getWidth(){
-		return Images.terrain[0][0].getWidth();
+		return WIDTH;
 	}
 }

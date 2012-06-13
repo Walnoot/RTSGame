@@ -148,7 +148,7 @@ public class Map {
 	public MovingEntity getClosestMovingEntity(int x, int y){
 		int closestX, closestY, closestDistance = 999;
 		int xe, ye;
-		Entity closest = new SnakeEntity(null, 0, 0); // i had to choose something...
+		Entity closest = null;
 		for(Entity e: entities){
 			xe = e.getxPos();
 			ye = e.getyPos();
